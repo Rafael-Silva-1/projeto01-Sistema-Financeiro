@@ -6,7 +6,7 @@ Var
    rendaLiquida, despTotal, saldoMensal : Real
    comprometida, poupar, aporte, capitalInicial : Real
    acumulado12, acumulado24, acumulado60 : Real
-   juros, simularJuros12, simularJuros24, simularJuros60 : Real
+   juros, taxaJuros, simularJuros12, simularJuros24, simularJuros60 : Real
 
 
 Inicio
@@ -73,12 +73,13 @@ Inicio
    Escreval("Simulação de juros compostos")
    Escreva("Digite a taxa mensal de juros a ser calculada: ")
    Leia(juros)
-   simularJuros12 <- acumulado12 * ((1 + juros) * 12)
-   simularJuros24 <- acumulado24 * ((1 + juros) * 14)
-   simularJuros60 <- acumulado60 * ((1 + juros) * 60)
-   Escreval("Simulação de juros com 12 meses (%) = ", simularJuros12)
-   Escreval("Simulação de juros com 24 meses (%) = ", simularJuros24)
-   Escreval("Simulação de juros com 60 meses (%) = ", simularJuros60)
+   taxaJuros <- (juros / 100) + 1
+   simularJuros12 <- acumulado12 * (Exp(taxaJuros, 12))
+   simularJuros24 <- acumulado24 * (Exp(taxaJuros, 24))
+   simularJuros60 <- acumulado60 * (Exp(taxaJuros, 60))
+   Escreval("Simulação de juros com 12 meses = ", simularJuros12)
+   Escreval("Simulação de juros com 24 meses = ", simularJuros24)
+   Escreval("Simulação de juros com 60 meses = ", simularJuros60)
    
    Escreval("")
    Escreval("========================================")
