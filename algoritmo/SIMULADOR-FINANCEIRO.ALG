@@ -57,7 +57,7 @@ Inicio
    
    // Calculo de acumulo de patrimônio
    Escreval("")
-   Escreval("Projeção de patrimônio SEM JUROS COMPOSTOS")
+   Escreval("Projeção de patrimônio - SEM JUROS COMPOSTOS")
    Escreva("Possui algum valor guardado? Quanto? ")
    leia(capitalInicial)
    Escreva("Quanto deseja aplicar por meses? ")
@@ -72,7 +72,7 @@ Inicio
    
    //Simulação e calculo de juros compostos
    Escreval("")
-   Escreval("Simulação de juros compostos SEM NOVAS APLICAÇÕES")
+   Escreval("Simulação de juros compostos - SEM NOVAS APLICAÇÕES")
    Escreva("Digite a taxa de juros a ser calculada (%): ")
    Leia(juros)
    taxaJuros <- (juros / 100) + 1
