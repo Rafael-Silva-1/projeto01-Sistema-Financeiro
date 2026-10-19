@@ -1,102 +1,156 @@
-# 04 — Fórmulas financeiras
+# Fórmulas Financeiras
 
-Este documento registra as fórmulas utilizadas ou previstas no simulador, com explicações e exemplos.
+Este documento apresenta as fórmulas utilizadas no Simulador Financeiro Pessoal, versão **v1.1.0**.
 
-## 1. Renda líquida
+## 1. Cálculo da renda líquida
 
-**Fórmula**
+A renda líquida é o salário bruto menos os descontos salariais.
 
-`rendaLiquida = salarioBruto - desconto`
+**Fórmula:**
 
-**Exemplo:** salário bruto de R$ 2.000,00 e desconto de R$ 200,00.
+```text
+rendaLiquida = salarioBruto - desconto
+```
 
-Resultado: `2000 - 200 = R$ 1.800,00`.
+**Exemplo:**
 
-## 2. Despesas totais
+- Salário bruto: R$ 2.000,00
+- Desconto: R$ 200,00
+- Renda líquida: R$ 1.800,00
 
-**Fórmula**
+## 2. Cálculo das despesas totais
 
-`despTotal = despFixa + despVariavel`
+Soma das despesas fixas e variáveis do mês.
 
-**Exemplo:** R$ 700,00 de despesas fixas e R$ 300,00 de despesas variáveis.
+**Fórmula:**
 
-Resultado: `700 + 300 = R$ 1.000,00`.
+```text
+despTotal = despFixa + despVariavel
+```
 
-## 3. Saldo mensal
+**Exemplo:**
 
-**Fórmula**
+- Despesas fixas: R$ 700,00
+- Despesas variáveis: R$ 300,00
+- Despesas totais: R$ 1.000,00
 
-`saldoMensal = rendaLiquida - despTotal`
+## 3. Cálculo do saldo mensal
 
-**Exemplo:** renda líquida de R$ 1.800,00 e despesas de R$ 1.000,00.
+Representa o dinheiro que sobra após subtrair as despesas da renda líquida.
 
-Resultado: `1800 - 1000 = R$ 800,00`.
+**Fórmula:**
+
+```text
+saldoMensal = rendaLiquida - despTotal
+```
+
+**Exemplo:**
+
+Com renda líquida de R$ 1.800,00 e despesas totais de R$ 1.000,00, o saldo mensal é de **R$ 800,00**.
 
 ## 4. Indicadores financeiros
 
-**Renda comprometida (%)**
+### 4.1. Renda comprometida
 
-`comprometida = (despTotal / rendaLiquida) * 100`
+Calcula a porcentagem da renda líquida utilizada para pagar as despesas.
 
-**Valor disponível para poupar (%)**
+**Fórmula:**
 
-`poupar = (saldoMensal / rendaLiquida) * 100`
+```text
+comprometida = (despTotal / rendaLiquida) * 100
+```
 
-**Exemplo:** renda líquida de R$ 1.800,00, despesas de R$ 1.000,00 e saldo de R$ 800,00.
+### 4.2. Valor disponível para poupar
 
-- Renda comprometida: `1000 / 1800 * 100 ≈ 55,6%`.
-- Valor disponível para poupar: `800 / 1800 * 100 ≈ 44,4%`.
+Calcula a porcentagem da renda líquida que sobra após as despesas.
 
-Esses cálculos exigem que a renda líquida seja diferente de zero.
+**Fórmula:**
 
-## 5. Patrimônio sem juros
+```text
+poupar = (saldoMensal / rendaLiquida) * 100
+```
 
-**Fórmula geral**
+**Exemplo:**
 
-`patrimonio = capitalInicial + (aporteMensal * meses)`
+Considerando renda líquida de R$ 1.800,00, despesas de R$ 1.000,00 e saldo de R$ 800,00:
 
-**Exemplo:** capital inicial de R$ 500,00 e aporte de R$ 300,00 por mês.
+- Renda comprometida: aproximadamente 55,6%.
+- Valor disponível para poupar: aproximadamente 44,4%.
 
-| Período  | Cálculo          | Patrimônio   |
-|----------|------------------|------------- |
-| 12 meses | 500 + (300 × 12) | R$ 4.100,00  |
-| 24 meses | 500 + (300 × 24) | R$ 7.700,00  |
+> **Observação:** os dois indicadores dependem de uma renda líquida diferente de zero.
+
+## 5. Projeção do patrimônio sem juros compostos
+
+Calcula quanto dinheiro pode ser acumulado somando o capital inicial aos aportes mensais, sem considerar rendimentos.
+
+**Fórmula geral:**
+
+```text
+patrimonio = capitalInicial + (aplicacao * meses)
+```
+
+**Exemplo:**
+
+- Capital inicial: R$ 500,00
+- Aporte mensal: R$ 300,00
+
+| Período | Cálculo | Patrimônio acumulado |
+|---|---|---:|
+| 12 meses | 500 + (300 × 12) | R$ 4.100,00 |
+| 24 meses | 500 + (300 × 24) | R$ 7.700,00 |
 | 60 meses | 500 + (300 × 60) | R$ 18.500,00 |
 
-## 6. Patrimônio com juros compostos e aportes mensais
+## 6. Conversão da taxa de juros
 
-Para comparar períodos equivalentes, a fórmula deve considerar o capital inicial rendendo durante todo o período e cada aporte mensal rendendo pelo tempo restante até o final do período.
+O programa recebe a taxa de juros em porcentagem e a converte em um fator utilizado no cálculo.
 
-**Premissas:**
-- `C` = capital inicial.
-- `A` = aporte mensal.
-- `i` = taxa de juros mensal em formato decimal.
-- `n` = número de meses.
-- Os aportes são realizados no fim de cada mês.
-- A taxa permanece constante durante o período.
+**Fórmula:**
 
-**Fórmula**
+```text
+taxaJuros = (juros / 100) + 1
+```
 
-`patrimonio = C * (1 + i)^n + A * (((1 + i)^n - 1) / i)`
+**Exemplo:**
 
-Se a variável `taxaJuros` já representa o fator `1 + i`, como no algoritmo:
+Para uma taxa informada de 0,6%:
 
-`taxaJuros = 1 + (juros / 100)`
+```text
+taxaJuros = (0.6 / 100) + 1
+taxaJuros = 1.006
+```
 
-a expressão pode ser escrita assim:
+O fator resultante é `1.006`.
 
-`patrimonio = C * taxaJuros^n + A * ((taxaJuros^n - 1) / (taxaJuros - 1))`
+## 7. Simulação de juros compostos
 
-No Visualg, `Exp(base, expoente)` é usada neste projeto para calcular a potência.
+Na versão atual, o programa utiliza os valores já calculados na projeção sem juros e aplica uma potência correspondente ao período informado.
 
-**Exemplo ilustrativo:** capital inicial de R$ 500,00, aporte mensal de R$ 300,00 e taxa de 0,6% ao mês (`i = 0,006`). O resultado ao fim de cada período é calculado com a fórmula acima para `n = 12`, `24` e `60`.
+**Fórmula utilizada:**
 
-> Atenção: quando a taxa é 0%, a fórmula da série de aportes tem divisão por zero. Essa situação ainda precisa ser tratada numa versão futura ou por uma fórmula alternativa. Os resultados também não incluem impostos, tarifas ou inflação.
+```java
+simulacao = acumulado * Math.pow(taxaJuros, meses);
+```
 
-## 7. Percentual para fator mensal
+No código, o cálculo é realizado separadamente para cada período:
 
-Se o usuário digitar a taxa como porcentagem, primeiro convertê-la para fator:
+```java
+simularJuros12 = acumulado12 * Math.pow(taxaJuros, 12);
+simularJuros24 = acumulado24 * Math.pow(taxaJuros, 24);
+simularJuros60 = acumulado60 * Math.pow(taxaJuros, 60);
+```
 
-`taxaJuros = 1 + (juros / 100)`
+### Como funciona?
 
-Exemplo: `juros = 0,6` resulta em `taxaJuros = 1,006`, equivalente a 0,6% ao mês.
+1. O programa calcula o patrimônio sem juros, considerando o capital inicial e os aportes mensais.
+2. Utiliza cada patrimônio calculado como base para a simulação.
+3. Aplica a taxa de juros pelo número de períodos correspondente.
+
+**Limitação atual:** a simulação aplica juros por um período adicional ao período usado para acumular os aportes. Por isso, o resultado não representa uma simulação de juros e aportes ocorrendo simultaneamente ao longo dos mesmos 12, 24 ou 60 meses.
+
+## 8. Limitações dos cálculos
+
+- A renda líquida igual a zero pode causar divisão por zero nos indicadores.
+- A taxa de juros igual a zero não recebe tratamento específico.
+- O programa não valida valores negativos.
+- Não são considerados impostos, tarifas ou inflação.
+- Os resultados são projeções matemáticas e não garantem rendimentos reais.
