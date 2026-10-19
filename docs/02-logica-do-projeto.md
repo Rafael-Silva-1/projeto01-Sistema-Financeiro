@@ -1,90 +1,84 @@
-# 02 — Lógica do projeto
+# Lógica do projeto
 
-## 1. Visão geral
+O programa executa uma sequência de entradas, cálculos e saídas.
 
-O programa coleta dados financeiros do usuário, calcula indicadores mensais e faz projeções de patrimônio. A execução segue uma sequência fixa, sem desvios ou repetições.
+## 1. Identificação
 
-## 2. Etapas de processamento
+O programa solicita o nome do usuário e armazena a informação na variável `nome`.
 
-### Etapa 1 — Identificação
+## 2. Renda líquida
 
-Solicitar o nome do usuário para iniciar a interação.
+Entradas:
+- `salarioBruto`
+- `desconto`
 
-### Etapa 2 — Cálculo da renda líquida
-
-**Entradas:** salário bruto e desconto salarial.
-
-**Processamento:**
+Cálculo:
 
 `rendaLiquida = salarioBruto - desconto`
 
-**Saída:** renda líquida mensal.
+O resultado representa o salário após a subtração do desconto informado.
 
-### Etapa 3 — Cálculo das despesas
+## 3. Despesas
 
-**Entradas:** despesas fixas e variáveis.
+Entradas:
+- `despFixa`
+- `despVariavel`
 
-**Processamento:**
+Cálculo:
 
 `despTotal = despFixa + despVariavel`
 
-**Saída:** total de despesas mensais.
+## 4. Saldo mensal
 
-### Etapa 4 — Cálculo do saldo mensal
-
-**Processamento:**
+Cálculo:
 
 `saldoMensal = rendaLiquida - despTotal`
 
-**Saída:** saldo que sobra (ou déficit, caso seja negativo) depois das despesas.
+O saldo pode ser positivo ou negativo, conforme os valores informados.
 
-### Etapa 5 — Indicadores financeiros
+## 5. Indicadores financeiros
 
-**Processamento:**
+Renda comprometida:
 
 `comprometida = (despTotal / rendaLiquida) * 100`
 
+Valor disponível para poupar:
+
 `poupar = (saldoMensal / rendaLiquida) * 100`
 
-**Saídas:** percentual da renda comprometida com despesas e percentual do saldo em relação à renda líquida.
+Os resultados são exibidos com uma casa decimal.
 
-> Limitação: se a renda líquida for zero, as divisões dos indicadores não podem ser calculadas. A versão sequencial ainda não trata esse caso.
+## 6. Projeção sem juros
 
-### Etapa 6 — Projeção sem juros compostos
+O programa solicita o capital inicial e o aporte mensal.
 
-**Entradas:** capital inicial e aporte mensal.
+Fórmulas:
 
-Para cada horizonte, somar o capital inicial aos aportes mensais acumulados:
+- `acumulado12 = capitalInicial + (aplicacao * 12)`
+- `acumulado24 = capitalInicial + (aplicacao * 24)`
+- `acumulado60 = capitalInicial + (aplicacao * 60)`
 
-- 12 meses: `capitalInicial + (aplicacao * 12)`
-- 24 meses: `capitalInicial + (aplicacao * 24)`
-- 60 meses: `capitalInicial + (aplicacao * 60)`
+Esses cálculos não incluem rendimentos.
 
-**Saídas:** patrimônio projetado sem rendimentos.
+## 7. Simulação de juros compostos
 
-### Etapa 7 — Simulação com juros compostos
+O programa solicita a taxa de juros em porcentagem e converte o valor em um fator:
 
-**Entrada:** taxa de juros mensal em porcentagem.
+`taxaJuros = (juros / 100) + 1`
 
-Converter a taxa percentual para um fator mensal:
+Em seguida, aplica a potência ao patrimônio calculado anteriormente:
 
-`taxaJuros = 1 + (juros / 100)`
+- `simularJuros12 = acumulado12 * Math.pow(taxaJuros, 12)`
+- `simularJuros24 = acumulado24 * Math.pow(taxaJuros, 24)`
+- `simularJuros60 = acumulado60 * Math.pow(taxaJuros, 60)`
 
-Para comparar os mesmos períodos da projeção sem juros, considerar tanto o crescimento do capital inicial quanto o crescimento dos aportes mensais realizados ao longo de cada período. A fórmula financeira está detalhada em `04-formulas-financeiras.md`.
+Essa etapa não inclui novas aplicações. O patrimônio usado como base, porém, já contém o capital inicial e os aportes mensais da projeção sem juros.
 
-**Saídas:** patrimônio simulado ao fim de 12, 24 e 60 meses.
+Por isso, a simulação representa um período adicional de capitalização sobre o valor projetado, e não o resultado com juros desde o primeiro mês da acumulação.
 
-## 3. Entradas, processamento e saídas
+## Observações
 
-| Etapa | Entradas principais | Processamento | Saída |
-|---|---|---|---|
-| Renda | Salário bruto, desconto | Subtração | Renda líquida |
-| Despesas | Despesas fixas e variáveis | Soma | Despesas totais |
-| Saldo | Renda líquida, despesas totais | Subtração | Saldo mensal |
-| Indicadores | Despesas, saldo, renda líquida | Divisão e multiplicação por 100 | Percentuais |
-| Sem juros | Capital inicial, aporte mensal | Soma e multiplicação | Projeções de patrimônio |
-| Com juros | Capital inicial, aporte, taxa mensal | Capitalização composta e série de aportes | Projeções com juros |
-
-## 4. Observação sobre a implementação
-
-A documentação descreve a comparação pretendida entre os mesmos horizontes de tempo. A expressão simples `acumulado12 * Exp(taxaJuros, 12)`, por exemplo, capitaliza por mais 12 meses um saldo que já representa 12 meses de aportes. Isso não equivale a uma simulação com juros e aportes durante os mesmos 12 meses. A implementação deve usar a fórmula com aportes mensais descrita no arquivo de fórmulas.
+- A execução é sequencial.
+- Não há decisões ou repetições.
+- Os indicadores exigem renda líquida diferente de zero.
+- A taxa informada é interpretada como porcentagem.
