@@ -1,61 +1,64 @@
-# 01 — Requisitos do projeto
+# Requisitos do projeto
 
-## 1. Identificação
+## Identificação
 
-- **Projeto:** Simulador Financeiro Pessoal
-- **Versão documentada:** v1.0.5
-- **Linguagem atual:** Portugol, utilizando Visualg
-- **Tipo de programa:** aplicação de linha de comando com estrutura sequencial
+- Projeto: Simulador Financeiro Pessoal
+- Versão: v1.1.0
+- Linguagens: Portugol (Visualg) e Java
+- Arquivo Java principal: Main.java
 
-## 2. Objetivo
+## Objetivo
 
-Ajudar o usuário a visualizar sua situação financeira mensal e projetar como o patrimônio pode crescer ao longo do tempo, comparando uma acumulação sem rendimentos com uma simulação que considera juros compostos.
+Calcular indicadores financeiros básicos e projetar o acúmulo de patrimônio com base nas informações fornecidas pelo usuário.
 
-## 3. Funcionalidades
+## Funcionalidades atuais
 
 1. Solicitar o nome do usuário.
-2. Receber salário bruto e desconto salarial e calcular a renda líquida.
-3. Receber despesas fixas e variáveis e calcular as despesas totais.
-4. Calcular o saldo mensal após as despesas.
-5. Calcular os percentuais da renda comprometida e disponível para poupar.
-6. Receber o capital já guardado e o aporte mensal desejado.
-7. Projetar o patrimônio sem juros após 12, 24 e 60 meses.
-8. Simular o crescimento do patrimônio com juros compostos para os mesmos períodos.
+2. Receber salário bruto e desconto salarial.
+3. Calcular a renda líquida.
+4. Receber despesas fixas e variáveis.
+5. Calcular as despesas totais e o saldo mensal.
+6. Calcular os indicadores de renda comprometida e valor disponível para poupar.
+7. Receber o capital inicial e o aporte mensal.
+8. Projetar o patrimônio sem juros para 12, 24 e 60 meses.
+9. Receber uma taxa de juros e simular juros compostos sobre os valores projetados.
 
-## 4. Entradas
+## Entradas
 
-- Nome do usuário.
+- Nome.
 - Salário bruto mensal.
 - Desconto salarial.
-- Despesas fixas mensais.
-- Despesas variáveis mensais.
-- Capital inicial guardado.
-- Valor do aporte mensal.
-- Taxa de juros mensal em porcentagem.
+- Despesas fixas.
+- Despesas variáveis.
+- Capital inicial.
+- Aporte mensal.
+- Taxa de juros informada em porcentagem.
 
-## 5. Resultados apresentados
+## Saídas
 
 - Renda líquida.
-- Total de despesas.
+- Despesas totais.
 - Saldo mensal.
 - Percentual da renda comprometida.
-- Percentual da renda disponível para poupar.
-- Patrimônio projetado sem juros em 12, 24 e 60 meses.
-- Patrimônio simulado com juros compostos nos mesmos horizontes.
+- Percentual disponível para poupar.
+- Patrimônio projetado sem juros.
+- Valores simulados com juros compostos.
 
-## 6. Regras e premissas financeiras
+## Tecnologias e conceitos
 
-- Todos os valores monetários são informados na mesma moeda, por exemplo, reais (R$).
-- O desconto salarial e as despesas são informados como valores monetários, não como percentuais.
-- O aporte é entendido como um valor mensal.
-- A taxa informada para juros compostos é mensal e deve ser digitada em porcentagem: por exemplo, `0,6` representa `0,6% ao mês`.
-- Para comparar períodos equivalentes, a simulação com juros deve considerar o capital inicial e os aportes mensais dentro do mesmo período de 12, 24 ou 60 meses.
-- A fórmula de aportes mensais documentada considera os depósitos no fim de cada mês.
+- Java e classe `Main`.
+- Método `main`.
+- `Scanner` para entrada de dados.
+- Variáveis do tipo `String` e `double`.
+- Operações aritméticas.
+- `System.out.println`, `System.out.print` e `System.out.printf`.
+- `Math.pow` para cálculo de potências.
 
-## 7. Limitações da versão
+## Limitações
 
-- O algoritmo usa estrutura sequencial: entradas, cálculos e saídas.
-- Esta versão não utiliza condicionais, estruturas de repetição, vetores, coleções, banco de dados ou métodos próprios.
-- Não há validação automática para entradas negativas, renda líquida igual a zero ou taxa de juros igual a zero.
-- Os resultados são projeções matemáticas, não garantias de rendimento.
-- A simulação não considera impostos, tarifas, inflação ou variações da taxa de juros.
+- Não há validação de entradas negativas.
+- A divisão dos indicadores não trata renda líquida igual a zero.
+- A taxa de juros zero não recebe tratamento especial.
+- A simulação de juros é feita sobre o patrimônio já projetado sem juros, aplicando a taxa por um período adicional.
+- Não são considerados impostos, tarifas ou inflação.
+- O programa não utiliza condicionais nem estruturas de repetição.
