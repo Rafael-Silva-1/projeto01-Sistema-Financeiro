@@ -1,35 +1,25 @@
-# 💰 Simulador Financeiro
+# Simulador Financeiro Pessoal 💰
 
-Um projeto desenvolvido em **Portugol (Visualg)** para praticar lógica de programação por meio de um simulador financeiro. O programa calcula indicadores da vida financeira e projeta a evolução do patrimônio ao longo do tempo.
+Esse projeto começou em Portugol, usando Visualg, como uma forma de praticar lógica de programação. Agora também tem uma versão em Java, onde continuo desenvolvendo e melhorando o simulador.
 
-> **Versão:** v1.0.5  
-> **Status:** Em desenvolvimento
+O programa recebe informações sobre renda e despesas, calcula alguns indicadores financeiros e faz projeções de quanto dinheiro pode ser acumulado ao longo do tempo.
 
-## 🎯 Objetivo
+## O que o programa faz?
 
-Desenvolver um projeto prático para aplicar conceitos de lógica de programação, cálculos matemáticos e organização de algoritmos, simulando situações financeiras do dia a dia.
+- Calcula a renda líquida a partir do salário bruto e dos descontos.
+- Soma as despesas fixas e variáveis.
+- Calcula o saldo mensal.
+- Mostra a porcentagem da renda comprometida com despesas e a porcentagem disponível para poupar.
+- Projeta o patrimônio em 12, 24 e 60 meses, sem juros compostos.
+- Simula juros compostos sobre os valores projetados, sem novas aplicações durante a etapa de simulação.
 
-## ✨ Funcionalidades
+## Tecnologias utilizadas
 
-- Cálculo da renda líquida mensal.
-- Cálculo das despesas fixas e variáveis.
-- Cálculo do saldo mensal.
-- Indicadores de renda comprometida e percentual disponível para poupar.
-- Projeção do patrimônio sem juros em 12, 24 e 60 meses.
-- Simulação de juros compostos.
+- Portugol / Visualg
+- Java
+- Git e GitHub
 
-## 🛠️ Tecnologias e conceitos
-
-- Portugol
-- Visualg
-- Variáveis e tipos de dados
-- Entrada e saída de dados
-- Operações aritméticas
-- Fórmulas financeiras
-- Documentação em Markdown
-- Fluxogramas com Mermaid
-
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 simulador-financeiro/
@@ -40,46 +30,37 @@ simulador-financeiro/
 │   ├── 04-formulas-financeiras.md
 │   └── 05-casos-de-teste.md
 ├── README.md
-└── simulador-financeiro.alg
+└── Main.java
 ```
 
-## ▶️ Como executar
+## Como executar a versão Java
 
-1. Abra o Visualg.
-2. Abra o arquivo do algoritmo.
-3. Execute o programa.
-4. Informe os dados solicitados e acompanhe os resultados.
+1. Tenha o JDK instalado.
+2. Abra o terminal na pasta onde está o arquivo `Main.java`.
+3. Compile o programa:
 
-## 📚 Documentação
+   `javac Main.java`
 
-A pasta `docs/` contém a documentação complementar:
+4. Execute:
 
-- **Requisitos:** objetivo e funcionalidades do sistema.
-- **Lógica do projeto:** etapas de processamento e cálculos.
-- **Fluxograma:** representação visual do algoritmo.
-- **Fórmulas financeiras:** explicação dos cálculos utilizados.
-- **Casos de teste:** exemplos para verificar os resultados.
+   `java Main`
 
-## ⚠️ Limitações conhecidas
+## Documentação
 
-- O projeto utiliza estrutura sequencial, sem condicionais ou laços de repetição.
-- Os indicadores ainda precisam tratar o caso de renda líquida igual a zero.
-- A simulação de juros compostos precisa considerar os aportes mensais dentro do mesmo período projetado.
+A pasta `docs/` contém os requisitos do projeto, a explicação da lógica, o fluxograma, as fórmulas utilizadas e alguns casos de teste.
+
+## Limitações atuais
+
+- O programa ainda não valida todas as entradas.
+- Se a renda líquida for zero, os indicadores financeiros podem causar divisão por zero.
+- A simulação de juros utiliza o patrimônio projetado sem juros como base e aplica a taxa novamente pelo período informado. Portanto, o período total contado desde o início da acumulação é maior que 12, 24 ou 60 meses.
 - Não são considerados impostos, tarifas ou inflação.
-- Os resultados são estimativas matemáticas, não garantias de rendimento.
+- O programa não utiliza condicionais nem estruturas de repetição.
 
-## 🗺️ Próximos passos
+## Próximos passos
 
-- Ajustar e validar a fórmula de juros compostos.
-- Testar os resultados com os casos de teste documentados.
-- Aprimorar o algoritmo e sua documentação.
-- Desenvolver uma futura versão em Java.
-
-## 👨‍💻 Sobre o projeto
-
-Este projeto faz parte da minha jornada de aprendizado em programação. Meu objetivo é evoluir gradualmente, praticando lógica de programação, resolução de problemas, documentação e desenvolvimento de projetos próprios.
+Continuar testando os cálculos, melhorar a simulação de juros e acrescentar novas funcionalidades conforme avanço nos estudos de Java.
 
 ---
 
-**Projeto educacional desenvolvido para fins de estudo.** Não substitui orientação financeira profissional.
-
+Projeto pessoal desenvolvido durante meus estudos de programação.
