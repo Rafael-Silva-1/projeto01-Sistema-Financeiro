@@ -1,77 +1,73 @@
-# 05 — Casos de teste
+# Casos de teste
 
-Estes casos ajudam a verificar os cálculos do Simulador Financeiro Pessoal. Os valores são exemplos de teste, não dados pessoais.
+Os exemplos abaixo podem ser utilizados para conferir os cálculos do programa.
 
 ## Caso 1 — Renda líquida
 
-**Entradas**
-- Salário bruto: R$ 2.000,00
-- Desconto: R$ 200,00
+Entradas:
+- Salário bruto: 2000
+- Desconto: 200
 
-**Resultado esperado**
-- Renda líquida: R$ 1.800,00
+Resultado esperado:
+- Renda líquida: 1800
 
-## Caso 2 — Despesas totais
+## Caso 2 — Despesas
 
-**Entradas**
-- Despesas fixas: R$ 700,00
-- Despesas variáveis: R$ 300,00
+Entradas:
+- Despesas fixas: 700
+- Despesas variáveis: 300
 
-**Resultado esperado**
-- Despesas totais: R$ 1.000,00
+Resultado esperado:
+- Despesas totais: 1000
 
 ## Caso 3 — Saldo e indicadores
 
-**Entradas**
-- Renda líquida: R$ 1.800,00
-- Despesas totais: R$ 1.000,00
+Valores:
+- Renda líquida: 1800
+- Despesas totais: 1000
 
-**Resultados esperados**
-- Saldo mensal: R$ 800,00
+Resultados esperados:
+- Saldo mensal: 800
 - Renda comprometida: aproximadamente 55,6%
 - Valor disponível para poupar: aproximadamente 44,4%
 
-## Caso 4 — Projeção sem juros
+## Caso 4 — Patrimônio sem juros
 
-**Entradas**
-- Capital inicial: R$ 500,00
-- Aporte mensal: R$ 300,00
+Entradas:
+- Capital inicial: 500
+- Aporte mensal: 300
 
-**Resultados esperados**
-- 12 meses: R$ 4.100,00
-- 24 meses: R$ 7.700,00
-- 60 meses: R$ 18.500,00
+Resultados esperados:
+- 12 meses: 4100
+- 24 meses: 7700
+- 60 meses: 18500
 
-## Caso 5 — Conversão da taxa mensal
+## Caso 5 — Conversão da taxa
 
-**Entrada**
-- Taxa mensal informada: `0,6`
+Entrada:
+- Taxa informada: 0.6
 
-**Resultado esperado**
-- Fator mensal: `1,006`
+Resultado esperado:
+- Fator de juros: 1.006
 
-Isso representa uma taxa de 0,6% por mês.
+## Caso 6 — Simulação de juros
 
-## Caso 6 — Juros e aportes no mesmo período
+Entradas:
+- Capital inicial: 500
+- Aporte mensal: 300
+- Taxa: 0.6%
 
-**Entradas**
-- Capital inicial: R$ 500,00
-- Aporte mensal: R$ 300,00
-- Taxa mensal: 0,6%
-- Aportes realizados no fim de cada mês
+Valores usados como base:
+- `acumulado12 = 4100`
+- `acumulado24 = 7700`
+- `acumulado60 = 18500`
 
-**Verificação esperada**
-- O valor final com juros deve ser calculado considerando o capital inicial e os aportes dentro do mesmo período.
-- O resultado com juros deve ser comparável diretamente com o valor sem juros para 12, 24 e 60 meses.
-- Com taxa positiva, o resultado com juros deve ser superior ao resultado sem juros, sob as premissas acima.
+O programa aplica a taxa aos valores acima durante 12, 24 e 60 períodos adicionais, respectivamente.
 
-**Importante:** a expressão antiga `acumulado12 * Exp(taxaJuros, 12)` capitaliza por mais 12 meses um valor que já representa 12 meses de acumulação sem juros. Ela não é o resultado esperado para este caso de teste.
+## Limitações conhecidas
 
-## Casos de borda conhecidos
-
-| Situação | Comportamento esperado / limitação |
-|---|---|
-| Renda líquida igual a zero | Os indicadores provocam divisão por zero; não tratado nesta versão sequencial. |
-| Taxa de juros igual a 0% | A fórmula de aportes com juros precisa de tratamento alternativo para evitar divisão por zero. |
-| Valor de entrada negativo | Não há validação nesta versão. |
-| Despesas maiores que a renda líquida | O saldo e o percentual para poupar podem ser negativos; o programa não impede esse resultado. |
+- Renda líquida igual a zero pode causar divisão por zero nos indicadores.
+- Valores negativos são aceitos sem validação.
+- A taxa zero não é tratada separadamente.
+- A simulação de juros usa um período adicional após a acumulação sem juros.
+- A leitura de números decimais com `Scanner` pode depender da configuração regional do ambiente Java.
