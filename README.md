@@ -1,66 +1,81 @@
-# Simulador Financeiro Pessoal 💰
+# Simulador Financeiro Pessoal
 
-Esse projeto começou em Portugol, usando Visualg, como uma forma de praticar lógica de programação. Agora também tem uma versão em Java, onde continuo desenvolvendo e melhorando o simulador.
+**Versão atual: v1.1.1**
 
-O programa recebe informações sobre renda e despesas, calcula alguns indicadores financeiros e faz projeções de quanto dinheiro pode ser acumulado ao longo do tempo.
+Projeto de estudo desenvolvido em Java para calcular renda líquida, despesas mensais, saldo, indicadores financeiros e projeções simples de patrimônio.
 
-## O que o programa faz?
+## Funcionalidades
 
-- Calcula a renda líquida a partir do salário bruto e dos descontos.
-- Soma as despesas fixas e variáveis.
-- Calcula o saldo mensal.
-- Mostra a porcentagem da renda comprometida com despesas e a porcentagem disponível para poupar.
-- Projeta o patrimônio em 12, 24 e 60 meses, sem juros compostos.
-- Simula juros compostos sobre os valores projetados, sem novas aplicações durante a etapa de simulação.
+- Leitura do nome do usuário.
+- Cálculo da renda líquida a partir do salário bruto e do desconto informado.
+- Validação do salário bruto, dos descontos e das despesas.
+- Cálculo das despesas totais e do saldo mensal.
+- Cálculo do percentual da renda comprometida e da capacidade de poupança.
+- Projeção de patrimônio em 12, 24 e 60 meses sem juros.
+- Simulação de juros compostos sobre os valores projetados, sem novas aplicações durante essa simulação.
 
-## Tecnologias utilizadas
+## Regras de validação da v1.1.1
 
-- Portugol / Visualg
+- Salário bruto deve ser de pelo menos R$ 1,00.
+- Desconto salarial não pode ser negativo.
+- A renda líquida deve ser maior que zero.
+- Despesas fixas e variáveis não podem ser negativas.
+- O capital inicial pode ser R$ 0,00, mas não pode ser negativo.
+- A aplicação mensal deve ser de pelo menos R$ 10,00.
+- A taxa de juros informada deve ser maior que zero.
+- Despesas totais podem superar a renda líquida. Nesse caso, o programa mostra saldo negativo, renda comprometida acima de 100% e capacidade de poupança negativa.
+
+## Tecnologias e conceitos
+
 - Java
-- Git e GitHub
+- `Scanner` para entrada de dados
+- Tipos `String` e `double`
+- Operações aritméticas
+- Estruturas condicionais `if`
+- `System.out.printf()` para formatar resultados
+- `Math.pow()` para a potência usada na simulação de juros
 
-## Estrutura do projeto
-
-```text
-simulador-financeiro/
-├── docs/
-│   ├── 01-requisitos.md
-│   ├── 02-logica-do-projeto.md
-│   ├── 03-fluxograma.md
-│   ├── 04-formulas-financeiras.md
-│   └── 05-casos-de-teste.md
-├── README.md
-└── Main.java
-```
-
-## Como executar a versão Java
+## Como executar
 
 1. Tenha o JDK instalado.
-2. Abra o terminal na pasta onde está o arquivo `Main.java`.
-3. Compile o programa:
+2. Salve o código em um arquivo chamado `Main.java`.
+3. No terminal, entre na pasta do arquivo e compile:
 
-   `javac Main.java`
+   ```bash
+   javac Main.java
+   ```
 
 4. Execute:
 
-   `java Main`
+   ```bash
+   java Main
+   ```
 
-## Documentação
+## Limitações conhecidas
 
-A pasta `docs/` contém os requisitos do projeto, a explicação da lógica, o fluxograma, as fórmulas utilizadas e alguns casos de teste.
+- Entradas não numéricas em campos lidos por `nextDouble()` podem causar `InputMismatchException`. O programa ainda não solicita uma nova entrada quando isso acontece.
+- A validação de valores não finitos, como `NaN` e infinito, ainda não foi implementada.
+- As mensagens de erro e o encerramento do programa estão repetidos em diferentes trechos. A refatoração ficará para uma etapa futura.
+- A taxa de juros é interpretada como percentual por período. O programa não identifica nem verifica automaticamente a periodicidade real da taxa.
 
-## Limitações atuais
+## Estrutura da documentação
 
-- O programa ainda não valida todas as entradas.
-- Se a renda líquida for zero, os indicadores financeiros podem causar divisão por zero.
-- A simulação de juros utiliza o patrimônio projetado sem juros como base e aplica a taxa novamente pelo período informado. Portanto, o período total contado desde o início da acumulação é maior que 12, 24 ou 60 meses.
-- Não são considerados impostos, tarifas ou inflação.
-- O programa não utiliza condicionais nem estruturas de repetição.
+- [`docs/01-requisitos.md`](docs/01-requisitos.md) — regras funcionais e validações.
+- [`docs/02-logica-do-projeto.md`](docs/02-logica-do-projeto.md) — sequência de execução e fórmulas.
+- [`docs/03-fluxograma.md`](docs/03-fluxograma.md) — fluxo principal do programa.
+- [`docs/04-formulas-financeiras.md`](docs/04-formulas-financeiras.md) — fórmulas e interpretação.
+- [`docs/05-casos-de-teste.md`](docs/05-casos-de-teste.md) — cenários para verificação manual.
+- [`docs/06-seguranca.md`](docs/06-seguranca.md) — limitações e melhorias de programação segura.
 
-## Próximos passos
+## Histórico de versões
 
-Continuar testando os cálculos, melhorar a simulação de juros e acrescentar novas funcionalidades conforme avanço nos estudos de Java.
+### v1.1.1 — Validações de dados
 
----
-
-Projeto pessoal desenvolvido durante meus estudos de programação.
+- Adicionada validação de salário bruto mínimo de R$ 1,00.
+- Adicionada validação para impedir renda líquida menor ou igual a zero.
+- Mantidas validações para descontos e despesas negativas.
+- Capital inicial igual a zero permitido.
+- Aplicação mensal mínima de R$ 10,00.
+- Taxa de juros precisa ser maior que zero.
+- Despesas superiores à renda são permitidas para evidenciar déficit financeiro.
+- Limitações relacionadas a entradas não numéricas e valores não finitos permanecem conhecidas e documentadas.

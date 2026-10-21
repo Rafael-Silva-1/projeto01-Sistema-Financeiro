@@ -1,64 +1,46 @@
-# Requisitos do projeto
-
-## Identificação
-
-- Projeto: Simulador Financeiro Pessoal
-- Versão: v1.1.0
-- Linguagens: Portugol (Visualg) e Java
-- Arquivo Java principal: Main.java
+# 01 — Requisitos do projeto
 
 ## Objetivo
 
-Calcular indicadores financeiros básicos e projetar o acúmulo de patrimônio com base nas informações fornecidas pelo usuário.
-
-## Funcionalidades atuais
-
-1. Solicitar o nome do usuário.
-2. Receber salário bruto e desconto salarial.
-3. Calcular a renda líquida.
-4. Receber despesas fixas e variáveis.
-5. Calcular as despesas totais e o saldo mensal.
-6. Calcular os indicadores de renda comprometida e valor disponível para poupar.
-7. Receber o capital inicial e o aporte mensal.
-8. Projetar o patrimônio sem juros para 12, 24 e 60 meses.
-9. Receber uma taxa de juros e simular juros compostos sobre os valores projetados.
+Calcular indicadores básicos da situação financeira mensal do usuário e apresentar projeções simples de acumulação de patrimônio.
 
 ## Entradas
 
-- Nome.
-- Salário bruto mensal.
-- Desconto salarial.
-- Despesas fixas.
-- Despesas variáveis.
-- Capital inicial.
-- Aporte mensal.
-- Taxa de juros informada em porcentagem.
+| Dado                     | Regra na v1.1.1                      |
+|--------------------------|--------------------------------------|
+| Nome                     | Texto informado pelo usuário         |
+| Salário bruto mensal     | Deve ser maior ou igual a R$ 1,00    |
+| Desconto salarial        | Não pode ser negativo                |
+| Despesas fixas           | Não podem ser negativas              |
+| Despesas variáveis       | Não podem ser negativas              |
+| Capital inicial guardado | Pode ser zero; não pode ser negativo |
+| Aplicação mensal         | Deve ser maior ou igual a R$ 10,00   |
+| Taxa de juros            | Deve ser maior que zero              |
 
-## Saídas
+## Regras de negócio
 
-- Renda líquida.
-- Despesas totais.
-- Saldo mensal.
-- Percentual da renda comprometida.
-- Percentual disponível para poupar.
-- Patrimônio projetado sem juros.
-- Valores simulados com juros compostos.
+1. A renda líquida é o salário bruto menos o desconto salarial.
+2. A renda líquida deve ser maior que zero para o programa continuar.
+3. As despesas totais são a soma das despesas fixas e variáveis.
+4. O saldo mensal é a renda líquida menos as despesas totais.
+5. Despesas maiores que a renda líquida são permitidas. O simulador deve exibir o déficit e os indicadores correspondentes.
+6. A renda comprometida é calculada como despesas totais divididas pela renda líquida, multiplicadas por 100.
+7. A capacidade de poupança é calculada como saldo mensal dividido pela renda líquida, multiplicado por 100.
+8. As projeções sem juros usam o capital inicial somado às aplicações mensais multiplicadas pelo número de meses.
+9. A taxa de juros igual a zero é rejeitada nesta versão porque a seção é destinada à simulação com rendimento; o cenário sem rendimento já aparece na projeção anterior.
 
-## Tecnologias e conceitos
+## Critérios de aceitação
 
-- Java e classe `Main`.
-- Método `main`.
-- `Scanner` para entrada de dados.
-- Variáveis do tipo `String` e `double`.
-- Operações aritméticas.
-- `System.out.println`, `System.out.print` e `System.out.printf`.
-- `Math.pow` para cálculo de potências.
+- Valores abaixo dos limites definidos são rejeitados com uma mensagem e encerramento do programa.
+- Saldo negativo não causa encerramento por si só.
+- Quando as despesas ultrapassam a renda líquida, a renda comprometida pode superar 100% e a capacidade de poupança pode ser negativa.
+- Os valores projetados são exibidos para 12, 24 e 60 meses.
 
-## Limitações
+## Fora do escopo desta versão
 
-- Não há validação de entradas negativas.
-- A divisão dos indicadores não trata renda líquida igual a zero.
-- A taxa de juros zero não recebe tratamento especial.
-- A simulação de juros é feita sobre o patrimônio já projetado sem juros, aplicando a taxa por um período adicional.
-- Não são considerados impostos, tarifas ou inflação.
-- O programa não utiliza condicionais nem estruturas de repetição.
+- Repetir a pergunta após uma entrada inválida.
+- Tratar de forma controlada texto digitado em campos numéricos.
+- Validar explicitamente `NaN` e infinito.
+- Usar métodos, funções ou rotinas para eliminar código repetido.
+- Persistir dados em arquivos ou banco de dados.
+- Autenticação, contas de usuário ou API.

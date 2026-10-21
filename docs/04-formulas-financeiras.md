@@ -1,137 +1,70 @@
-# Fórmulas Financeiras
+# 04 — Fórmulas financeiras
 
-Este documento apresenta as fórmulas utilizadas no Simulador Financeiro Pessoal, versão **v1.1.0**.
+## 1. Renda líquida
 
-## 1. Cálculo da renda líquida
-
-A renda líquida é o salário bruto menos os descontos salariais.
-
-**Fórmula:**
+A renda líquida é o salário bruto após o desconto informado.
 
 ```text
 rendaLiquida = salarioBruto - desconto
 ```
 
-**Exemplo:**
+Regra: `rendaLiquida` precisa ser maior que zero para o programa continuar.
 
-- Salário bruto: R$ 2.000,00
-- Desconto: R$ 200,00
-- Renda líquida: R$ 1.800,00
-
-## 2. Cálculo das despesas totais
-
-Soma das despesas fixas e variáveis do mês.
-
-**Fórmula:**
+## 2. Despesas totais
 
 ```text
 despTotal = despFixa + despVariavel
 ```
 
-**Exemplo:**
+Despesas fixas e variáveis não podem ser negativas. A soma pode, intencionalmente, ultrapassar a renda líquida.
 
-- Despesas fixas: R$ 700,00
-- Despesas variáveis: R$ 300,00
-- Despesas totais: R$ 1.000,00
-
-## 3. Cálculo do saldo mensal
-
-Representa o dinheiro que sobra após subtrair as despesas da renda líquida.
-
-**Fórmula:**
+## 3. Saldo mensal
 
 ```text
 saldoMensal = rendaLiquida - despTotal
 ```
 
-**Exemplo:**
+- Saldo positivo: sobra dinheiro no mês.
+- Saldo igual a zero: toda a renda líquida foi comprometida.
+- Saldo negativo: as despesas ultrapassam a renda líquida.
 
-Com renda líquida de R$ 1.800,00 e despesas totais de R$ 1.000,00, o saldo mensal é de **R$ 800,00**.
-
-## 4. Indicadores financeiros
-
-### 4.1. Renda comprometida
-
-Calcula a porcentagem da renda líquida utilizada para pagar as despesas.
-
-**Fórmula:**
+## 4. Renda comprometida
 
 ```text
 comprometida = (despTotal / rendaLiquida) * 100
 ```
 
-### 4.2. Valor disponível para poupar
+Quando as despesas são maiores que a renda líquida, o indicador ultrapassa 100%.
 
-Calcula a porcentagem da renda líquida que sobra após as despesas.
-
-**Fórmula:**
+## 5. Capacidade de poupança
 
 ```text
 poupar = (saldoMensal / rendaLiquida) * 100
 ```
 
-**Exemplo:**
+Um resultado negativo indica déficit, não dinheiro disponível para poupar.
 
-Considerando renda líquida de R$ 1.800,00, despesas de R$ 1.000,00 e saldo de R$ 800,00:
+## 6. Projeção sem juros
 
-- Renda comprometida: aproximadamente 55,6%.
-- Valor disponível para poupar: aproximadamente 44,4%.
-
-> **Observação:** os dois indicadores dependem de uma renda líquida diferente de zero.
-
-## 5. Projeção do patrimônio sem juros compostos
-
-Calcula quanto dinheiro pode ser acumulado somando o capital inicial aos aportes mensais, sem considerar rendimentos.
-
-**Fórmula geral:**
+Para um período de `n` meses:
 
 ```text
-patrimonio = capitalInicial + (aplicacao * meses)
+acumulado = capitalInicial + (aplicacao * n)
 ```
 
-**Exemplo:**
+A versão calcula essa projeção para 12, 24 e 60 meses.
 
-- Capital inicial: R$ 500,00
-- Aporte mensal: R$ 300,00
+## 7. Conversão da taxa
 
-| Período | Cálculo | Patrimônio acumulado |
-|---|---|---:|
-| 12 meses | 500 + (300 × 12) | R$ 4.100,00 |
-| 24 meses | 500 + (300 × 24) | R$ 7.700,00 |
-| 60 meses | 500 + (300 × 60) | R$ 18.500,00 |
-
-## 6. Conversão da taxa de juros
-
-O programa recebe a taxa de juros em porcentagem e a converte em um fator utilizado no cálculo.
-
-**Fórmula:**
+A taxa digitada é interpretada como percentual. O fator usado na potência é:
 
 ```text
 taxaJuros = (juros / 100) + 1
 ```
 
-**Exemplo:**
+Por exemplo, uma taxa informada como `0,1` representa 0,1% por período, segundo a interpretação do programa.
 
-Para uma taxa informada de 0,6%:
-
-```text
-taxaJuros = (0.6 / 100) + 1
-taxaJuros = 1.006
-```
-
-O fator resultante é `1.006`.
-
-## 7. Simulação de juros compostos
-
-Na versão atual, o programa utiliza os valores já calculados na projeção sem juros e aplica uma potência correspondente ao período informado.
-
-**Fórmula utilizada:**
-
-```java
-simulacao = acumulado * Math.pow(taxaJuros, meses);
-```
-
-No código, o cálculo é realizado separadamente para cada período:
+## 8. Simulação de juros atual
 
 ```java
 simularJuros12 = acumulado12 * Math.pow(taxaJuros, 12);
@@ -139,18 +72,18 @@ simularJuros24 = acumulado24 * Math.pow(taxaJuros, 24);
 simularJuros60 = acumulado60 * Math.pow(taxaJuros, 60);
 ```
 
-### Como funciona?
+Essas fórmulas aplicam juros ao valor acumulado sem juros já calculado. Portanto, cada resultado acrescenta outro período de juros ao montante projetado anteriormente; não modela diretamente depósitos mensais rendendo desde a data de cada depósito.
 
-1. O programa calcula o patrimônio sem juros, considerando o capital inicial e os aportes mensais.
-2. Utiliza cada patrimônio calculado como base para a simulação.
-3. Aplica a taxa de juros pelo número de períodos correspondente.
+## 9. Exemplo de déficit
 
-**Limitação atual:** a simulação aplica juros por um período adicional ao período usado para acumular os aportes. Por isso, o resultado não representa uma simulação de juros e aportes ocorrendo simultaneamente ao longo dos mesmos 12, 24 ou 60 meses.
+Se a renda líquida for R$ 2.000,00 e as despesas totais forem R$ 2.200,00:
 
-## 8. Limitações dos cálculos
+| Indicador | Resultado |
+|---|---:|
+| Saldo mensal | -R$ 200,00 |
+| Renda comprometida | 110% |
+| Capacidade de poupança | -10% |
 
-- A renda líquida igual a zero pode causar divisão por zero nos indicadores.
-- A taxa de juros igual a zero não recebe tratamento específico.
-- O programa não valida valores negativos.
-- Não são considerados impostos, tarifas ou inflação.
-- Os resultados são projeções matemáticas e não garantem rendimentos reais.
+## Limitações
+
+A simulação é educativa e simplificada. Não considera impostos, taxas, inflação, mudanças na taxa de juros ou o momento exato de cada aporte. Os resultados não devem ser interpretados como previsão ou recomendação de investimento.

@@ -1,84 +1,32 @@
-# Lógica do projeto
+# 02 — Lógica do projeto
 
-O programa executa uma sequência de entradas, cálculos e saídas.
+## Sequência principal
 
-## 1. Identificação
+1. Declarar as variáveis e criar o `Scanner`.
+2. Solicitar o nome e exibir o cabeçalho personalizado.
+3. Solicitar o salário bruto e rejeitar valores menores que R$ 1,00.
+4. Solicitar o desconto e rejeitar valores negativos.
+5. Calcular a renda líquida e encerrar se ela for menor ou igual a zero.
+6. Solicitar despesas fixas e variáveis, rejeitando valores negativos.
+7. Somar as despesas e calcular o saldo mensal.
+8. Calcular e apresentar os indicadores financeiros.
+9. Solicitar o capital inicial, permitindo zero e rejeitando valores negativos.
+10. Solicitar a aplicação mensal e rejeitar valores abaixo de R$ 10,00.
+11. Calcular as projeções sem juros para 12, 24 e 60 meses.
+12. Solicitar a taxa de juros e rejeitar valores menores ou iguais a zero.
+13. Calcular e apresentar as simulações de juros.
+14. Exibir a mensagem de encerramento e fechar o `Scanner`.
 
-O programa solicita o nome do usuário e armazena a informação na variável `nome`.
+## Decisões condicionais
 
-## 2. Renda líquida
+A versão usa estruturas `if` para interromper o programa quando uma regra de validação é violada. As validações são sequenciais e não há repetição automática de perguntas.
 
-Entradas:
-- `salarioBruto`
-- `desconto`
+## Tratamento de déficit
 
-Cálculo:
+O programa não rejeita despesas totais superiores à renda líquida. Isso é intencional: permite que o usuário veja um saldo negativo e indicadores que evidenciam o déficit.
 
-`rendaLiquida = salarioBruto - desconto`
+## Limitações de fluxo
 
-O resultado representa o salário após a subtração do desconto informado.
-
-## 3. Despesas
-
-Entradas:
-- `despFixa`
-- `despVariavel`
-
-Cálculo:
-
-`despTotal = despFixa + despVariavel`
-
-## 4. Saldo mensal
-
-Cálculo:
-
-`saldoMensal = rendaLiquida - despTotal`
-
-O saldo pode ser positivo ou negativo, conforme os valores informados.
-
-## 5. Indicadores financeiros
-
-Renda comprometida:
-
-`comprometida = (despTotal / rendaLiquida) * 100`
-
-Valor disponível para poupar:
-
-`poupar = (saldoMensal / rendaLiquida) * 100`
-
-Os resultados são exibidos com uma casa decimal.
-
-## 6. Projeção sem juros
-
-O programa solicita o capital inicial e o aporte mensal.
-
-Fórmulas:
-
-- `acumulado12 = capitalInicial + (aplicacao * 12)`
-- `acumulado24 = capitalInicial + (aplicacao * 24)`
-- `acumulado60 = capitalInicial + (aplicacao * 60)`
-
-Esses cálculos não incluem rendimentos.
-
-## 7. Simulação de juros compostos
-
-O programa solicita a taxa de juros em porcentagem e converte o valor em um fator:
-
-`taxaJuros = (juros / 100) + 1`
-
-Em seguida, aplica a potência ao patrimônio calculado anteriormente:
-
-- `simularJuros12 = acumulado12 * Math.pow(taxaJuros, 12)`
-- `simularJuros24 = acumulado24 * Math.pow(taxaJuros, 24)`
-- `simularJuros60 = acumulado60 * Math.pow(taxaJuros, 60)`
-
-Essa etapa não inclui novas aplicações. O patrimônio usado como base, porém, já contém o capital inicial e os aportes mensais da projeção sem juros.
-
-Por isso, a simulação representa um período adicional de capitalização sobre o valor projetado, e não o resultado com juros desde o primeiro mês da acumulação.
-
-## Observações
-
-- A execução é sequencial.
-- Não há decisões ou repetições.
-- Os indicadores exigem renda líquida diferente de zero.
-- A taxa informada é interpretada como porcentagem.
+- Se o usuário digitar texto em vez de número em uma chamada a `nextDouble()`, pode ocorrer `InputMismatchException`.
+- O programa ainda não oferece uma nova tentativa após entrada inválida.
+- A repetição de mensagens de encerramento será considerada para refatoração quando o projeto avançar para métodos e organização em rotinas.
