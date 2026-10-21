@@ -11,7 +11,7 @@ Var
 
 Inicio
    Escreval("========================================")
-   Escreval("          Simulador Financeiro          ")
+   Escreval("          SIMULADOR FINANCEIRO          ")
    Escreval("========================================")
 
    Escreval("")
