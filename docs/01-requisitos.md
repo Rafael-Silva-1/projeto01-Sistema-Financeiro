@@ -1,46 +1,38 @@
-# 01 — Requisitos do projeto
+# Requisitos do projeto
 
 ## Objetivo
+Desenvolver um programa de terminal em Java que ajude o usuário a visualizar sua situação financeira mensal e estimar a acumulação de dinheiro ao longo do tempo.
 
-Calcular indicadores básicos da situação financeira mensal do usuário e apresentar projeções simples de acumulação de patrimônio.
+## Entradas principais
+- Nome do usuário.
+- Salário bruto.
+- Desconto sobre o salário.
+- Despesas fixas e variáveis.
+- Capital inicial.
+- Aporte mensal.
+- Taxa de juros para a simulação.
 
-## Entradas
+## Validações implementadas na v1.1.1
+- Salário bruto de pelo menos R$ 1,00.
+- Desconto e despesas não podem ser negativos.
+- Renda líquida precisa ser maior que zero.
+- Capital inicial não pode ser negativo.
+- Aporte mensal mínimo de R$ 10,00.
+- Taxa de juros precisa ser maior que zero.
+- Despesas maiores que a renda líquida são permitidas para demonstrar o déficit.
 
-| Dado                     | Regra na v1.1.1                      |
-|--------------------------|--------------------------------------|
-| Nome                     | Texto informado pelo usuário         |
-| Salário bruto mensal     | Deve ser maior ou igual a R$ 1,00    |
-| Desconto salarial        | Não pode ser negativo                |
-| Despesas fixas           | Não podem ser negativas              |
-| Despesas variáveis       | Não podem ser negativas              |
-| Capital inicial guardado | Pode ser zero; não pode ser negativo |
-| Aplicação mensal         | Deve ser maior ou igual a R$ 10,00   |
-| Taxa de juros            | Deve ser maior que zero              |
+## Requisito adicionado na v1.1.2
+Após calcular o saldo mensal, identificar uma das situações:
+1. Saldo positivo: `saldoMensal > 0`.
+2. Saldo zerado: `saldoMensal == 0`.
+3. Saldo negativo: `saldoMensal < 0`.
 
-## Regras de negócio
+A mensagem exibida deve ser compatível com o resultado.
 
-1. A renda líquida é o salário bruto menos o desconto salarial.
-2. A renda líquida deve ser maior que zero para o programa continuar.
-3. As despesas totais são a soma das despesas fixas e variáveis.
-4. O saldo mensal é a renda líquida menos as despesas totais.
-5. Despesas maiores que a renda líquida são permitidas. O simulador deve exibir o déficit e os indicadores correspondentes.
-6. A renda comprometida é calculada como despesas totais divididas pela renda líquida, multiplicadas por 100.
-7. A capacidade de poupança é calculada como saldo mensal dividido pela renda líquida, multiplicado por 100.
-8. As projeções sem juros usam o capital inicial somado às aplicações mensais multiplicadas pelo número de meses.
-9. A taxa de juros igual a zero é rejeitada nesta versão porque a seção é destinada à simulação com rendimento; o cenário sem rendimento já aparece na projeção anterior.
-
-## Critérios de aceitação
-
-- Valores abaixo dos limites definidos são rejeitados com uma mensagem e encerramento do programa.
-- Saldo negativo não causa encerramento por si só.
-- Quando as despesas ultrapassam a renda líquida, a renda comprometida pode superar 100% e a capacidade de poupança pode ser negativa.
-- Os valores projetados são exibidos para 12, 24 e 60 meses.
-
-## Fora do escopo desta versão
-
-- Repetir a pergunta após uma entrada inválida.
-- Tratar de forma controlada texto digitado em campos numéricos.
-- Validar explicitamente `NaN` e infinito.
-- Usar métodos, funções ou rotinas para eliminar código repetido.
-- Persistir dados em arquivos ou banco de dados.
-- Autenticação, contas de usuário ou API.
+## Fora do escopo atual
+- Tratamento completo de entradas não numéricas.
+- Validação específica para `NaN` e infinito.
+- Interface gráfica ou aplicação web.
+- Armazenamento persistente.
+- Recomendações financeiras personalizadas.
+- Refatoração da lógica em métodos.

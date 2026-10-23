@@ -98,8 +98,20 @@ public class Main {
 
         // SALDO DO FINAL DO MES: inicio
         System.out.println("");
+
         saldoMensal = rendaLiquida - despTotal;
+
         System.out.printf("Saldo Mensal = %.2f%n", saldoMensal);
+
+        System.out.println("");
+
+        if (saldoMensal > 0){
+            System.out.println("=== Mês concluído com saldo positivo ===");
+        }else if (saldoMensal == 0) {
+            System.out.println("=== Todo seu saldo do mês foi comprometido ===");
+        }else {
+            System.out.println("=== As despesas ultrapassaram a renda liquida ===");
+        }
         // SALDO DO FINAL DO MES: fim
 
 
