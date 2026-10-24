@@ -2,21 +2,19 @@
 
 ## Fluxo geral
 1. Declarar variáveis e apresentar o cabeçalho.
-2. Solicitar dados pessoais e financeiros.
+2. Solicitar dados financeiros.
 3. Validar valores conforme as regras implementadas.
-4. Calcular a renda líquida.
-5. Calcular despesas totais e saldo mensal.
-6. Exibir indicadores financeiros.
-7. Interpretar o saldo mensal.
-8. Calcular projeções sem juros.
-9. Executar a simulação complementar de juros compostos.
-10. Encerrar o programa.
+4. Calcular renda líquida, despesas totais e saldo mensal.
+5. Calcular e exibir indicadores financeiros.
+6. Interpretar o saldo mensal e os indicadores.
+7. Calcular projeções sem juros.
+8. Executar a simulação complementar de juros compostos.
 
-## Interpretação do saldo — v1.1.2
-O saldo é calculado por `saldoMensal = rendaLiquida - despTotal`.
+## Interpretação dos indicadores — v1.1.3
+O programa calcula:
+- `comprometida = (despTotal / rendaLiquida) * 100`
+- `poupar = (saldoMensal / rendaLiquida) * 100`
 
-- Saldo maior que zero: mês terminou com saldo positivo.
-- Saldo igual a zero: renda líquida totalmente comprometida com as despesas, sem déficit.
-- Saldo menor que zero: despesas ultrapassaram a renda líquida e houve déficit mensal.
+A renda comprometida é interpretada em quatro faixas: abaixo de 50%, exatamente 50%, acima de 50% até 100%, e acima de 100%.
 
-A estrutura condicional exibe apenas uma dessas mensagens. Um saldo negativo não bloqueia a execução: é um resultado financeiro válido a ser informado.
+A capacidade de poupança é interpretada como positiva, zerada ou negativa. As mensagens não alteram os valores calculados.

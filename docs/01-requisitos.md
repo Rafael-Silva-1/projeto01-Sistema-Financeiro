@@ -1,38 +1,31 @@
 # Requisitos do projeto
 
 ## Objetivo
-Desenvolver um programa de terminal em Java que ajude o usuário a visualizar sua situação financeira mensal e estimar a acumulação de dinheiro ao longo do tempo.
+Programa de terminal em Java para visualizar a situação financeira mensal e estimar acumulação de dinheiro.
 
 ## Entradas principais
-- Nome do usuário.
-- Salário bruto.
-- Desconto sobre o salário.
-- Despesas fixas e variáveis.
-- Capital inicial.
-- Aporte mensal.
-- Taxa de juros para a simulação.
+Nome, salário bruto, desconto, despesas fixas e variáveis, capital inicial, aporte mensal e taxa de juros.
 
-## Validações implementadas na v1.1.1
+## Validações básicas
 - Salário bruto de pelo menos R$ 1,00.
-- Desconto e despesas não podem ser negativos.
-- Renda líquida precisa ser maior que zero.
-- Capital inicial não pode ser negativo.
+- Desconto e despesas não negativos.
+- Renda líquida maior que zero.
+- Capital inicial não negativo.
 - Aporte mensal mínimo de R$ 10,00.
-- Taxa de juros precisa ser maior que zero.
-- Despesas maiores que a renda líquida são permitidas para demonstrar o déficit.
+- Taxa de juros maior que zero.
+- Despesas superiores à renda são permitidas para demonstrar o déficit.
 
-## Requisito adicionado na v1.1.2
-Após calcular o saldo mensal, identificar uma das situações:
-1. Saldo positivo: `saldoMensal > 0`.
-2. Saldo zerado: `saldoMensal == 0`.
-3. Saldo negativo: `saldoMensal < 0`.
+## Interpretação de resultados
+### v1.1.2 — Saldo mensal
+- `saldoMensal > 0`: saldo positivo.
+- `saldoMensal == 0`: saldo zerado.
+- `saldoMensal < 0`: déficit mensal.
 
-A mensagem exibida deve ser compatível com o resultado.
+### v1.1.3 — Indicadores
+- Renda comprometida: menos de 50%, exatamente 50%, acima de 50% até 100%, ou acima de 100%.
+- Capacidade de poupança: percentual positivo, zero ou negativo.
 
-## Fora do escopo atual
-- Tratamento completo de entradas não numéricas.
-- Validação específica para `NaN` e infinito.
-- Interface gráfica ou aplicação web.
-- Armazenamento persistente.
-- Recomendações financeiras personalizadas.
-- Refatoração da lógica em métodos.
+As faixas são referências didáticas, não regras financeiras universais.
+
+## Fora do escopo
+Tratamento completo de entradas não numéricas, validação de `NaN`/infinito, interface gráfica, armazenamento persistente, recomendações automáticas e refatoração em métodos.

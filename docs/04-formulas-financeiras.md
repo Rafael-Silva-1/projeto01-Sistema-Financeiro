@@ -9,17 +9,23 @@
 ## Saldo mensal
 `saldoMensal = rendaLiquida - despTotal`
 
-Interpretação adicionada na v1.1.2:
-- `saldoMensal > 0`: saldo positivo.
-- `saldoMensal == 0`: saldo zerado.
-- `saldoMensal < 0`: déficit mensal.
-
 ## Indicadores
 `comprometida = (despTotal / rendaLiquida) * 100`
 
 `poupar = (saldoMensal / rendaLiquida) * 100`
 
-Despesas podem superar a renda líquida; assim, o comprometimento pode passar de 100% e a capacidade de poupança pode ser negativa.
+Renda comprometida:
+- Abaixo de 50%: menos da metade.
+- Exatamente 50%: metade.
+- Acima de 50% até 100%: mais da metade.
+- Acima de 100%: despesas superiores à renda líquida.
+
+Capacidade de poupança:
+- Maior que zero: parte da renda ficou disponível.
+- Igual a zero: não houve sobra.
+- Menor que zero: déficit mensal.
+
+As faixas são didáticas. A renda líquida precisa ser positiva para evitar divisão por zero.
 
 ## Projeção sem juros
 `acumulado12 = capitalInicial + (aplicacao * 12)`
@@ -28,9 +34,9 @@ Despesas podem superar a renda líquida; assim, o comprometimento pode passar de
 
 `acumulado60 = capitalInicial + (aplicacao * 60)`
 
-## Simulação complementar com juros compostos
+## Simulação complementar com juros
 `taxaJuros = (juros / 100) + 1`
 
 `valorComJuros = acumuladoN * Math.pow(taxaJuros, N)`
 
-É uma simulação simplificada: como o valor acumulado já inclui os aportes da projeção sem juros, o cálculo não equivale a capitalizar cada aporte mensal durante o período.
+É uma simulação simplificada: não capitaliza cada aporte mensal individualmente.

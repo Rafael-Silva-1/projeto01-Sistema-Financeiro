@@ -1,24 +1,28 @@
 # Casos de teste
 
-## Testes da v1.1.2 — interpretação do saldo
-Os três testes abaixo foram executados manualmente pelo desenvolvedor e tiveram resultados corretos.
+## v1.1.3 — Indicadores
+O desenvolvedor informou que executou os testes planejados e não encontrou problemas.
 
-| Caso | Renda líquida | Despesas totais | Saldo esperado | Resultado |
-|---|---:|---:|---:|---|
-| Positivo | R$ 2.000,00 | R$ 1.500,00 | R$ 500,00 | Situação positiva |
-| Zerado | R$ 2.000,00 | R$ 2.000,00 | R$ 0,00 | Situação equilibrada |
-| Negativo | R$ 2.000,00 | R$ 2.250,00 | -R$ 250,00 | Situação negativa / déficit |
+Cenários previstos para renda comprometida:
+- Abaixo de 50%.
+- Exatamente 50%.
+- Acima de 50% e abaixo de 100%.
+- Exatamente 100%.
+- Acima de 100%.
 
-## Testes de regressão recomendados
-Em futuras alterações, conferir:
-- Salário abaixo do mínimo permitido.
-- Desconto negativo.
-- Renda líquida igual ou inferior a zero.
-- Despesas negativas e despesas superiores à renda líquida.
-- Capital inicial negativo.
-- Aporte mensal abaixo do mínimo.
-- Taxa de juros igual ou inferior a zero.
-- Projeções de 12, 24 e 60 meses.
-- Cálculo dos indicadores financeiros.
+Cenários previstos para capacidade de poupança:
+- Percentual positivo.
+- Percentual zero.
+- Percentual negativo.
 
-Os itens de regressão são recomendações e não devem ser considerados aprovados sem execução.
+## v1.1.2 — Saldo mensal
+Os três cenários foram testados manualmente com resultados corretos.
+
+| Caso | Renda líquida | Despesas | Saldo esperado |
+|---|---:|---:|---:|
+| Positivo | R$ 2.000,00 | R$ 1.500,00 | R$ 500,00 |
+| Zerado | R$ 2.000,00 | R$ 2.000,00 | R$ 0,00 |
+| Negativo | R$ 2.000,00 | R$ 2.250,00 | -R$ 250,00 |
+
+## Regressão recomendada
+Antes de futuras publicações, repetir os testes de validação, indicadores, projeções e interpretação do saldo. Não considerar testes não executados como aprovados.

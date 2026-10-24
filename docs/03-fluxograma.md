@@ -1,19 +1,24 @@
 # Fluxograma
 
-Diagrama da interpretação do saldo mensal adicionada na v1.1.2.
+Fluxo simplificado da interpretação dos indicadores adicionada na v1.1.3.
 
 ```mermaid
 flowchart TD
-    A[Calcular renda líquida] --> B[Calcular despesas totais]
-    B --> C[Calcular saldo mensal]
-    C --> D{Saldo mensal > 0?}
-    D -- Sim --> E[Exibir situação positiva]
-    D -- Não --> F{Saldo mensal == 0?}
-    F -- Sim --> G[Exibir situação equilibrada]
-    F -- Não --> H[Exibir situação negativa / déficit]
-    E --> I[Continuar projeções financeiras]
-    G --> I
-    H --> I
+    A[Calcular saldo mensal] --> B[Calcular indicadores]
+    B --> C{Comprometida < 50?}
+    C -- Sim --> D[Exibir menos da metade]
+    C -- Não --> E{Comprometida == 50?}
+    E -- Sim --> F[Exibir exatamente metade]
+    E -- Não --> G{Comprometida <= 100?}
+    G -- Sim --> H[Exibir mais da metade até 100%]
+    G -- Não --> I[Exibir despesas acima da renda]
+    D --> J[Interpretar capacidade de poupança]
+    F --> J
+    H --> J
+    I --> J
+    J --> K{Poupar > 0?}
+    K -- Sim --> L[Exibir percentual disponível]
+    K -- Não --> M{Poupar == 0?}
+    M -- Sim --> N[Exibir nenhuma sobra]
+    M -- Não --> O[Exibir déficit]
 ```
-
-Saldo negativo é uma situação financeira a informar, não uma falha do programa.
