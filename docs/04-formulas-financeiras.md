@@ -3,40 +3,48 @@
 ## Renda líquida
 `rendaLiquida = salarioBruto - desconto`
 
+Representa o salário após a subtração dos descontos informados.
+
 ## Despesas totais
 `despTotal = despFixa + despVariavel`
+
+Soma as despesas fixas e variáveis do mês.
 
 ## Saldo mensal
 `saldoMensal = rendaLiquida - despTotal`
 
+- Resultado positivo: sobra dinheiro no mês.
+- Resultado igual a zero: toda a renda líquida foi comprometida.
+- Resultado negativo: as despesas ultrapassam a renda líquida.
+
 ## Indicadores
+
+### Renda comprometida
 `comprometida = (despTotal / rendaLiquida) * 100`
 
+Indica a porcentagem da renda líquida usada para cobrir despesas.
+
+### Capacidade de poupança
 `poupar = (saldoMensal / rendaLiquida) * 100`
 
-Renda comprometida:
-- Abaixo de 50%: menos da metade.
-- Exatamente 50%: metade.
-- Acima de 50% até 100%: mais da metade.
-- Acima de 100%: despesas superiores à renda líquida.
+Indica a porcentagem da renda líquida que sobra ou falta após as despesas.
 
-Capacidade de poupança:
-- Maior que zero: parte da renda ficou disponível.
-- Igual a zero: não houve sobra.
-- Menor que zero: déficit mensal.
+## Projeções sem juros
+Para cada período, o valor projetado soma o capital inicial aos aportes mensais:
 
-As faixas são didáticas. A renda líquida precisa ser positiva para evitar divisão por zero.
+- `acumulado12 = capitalInicial + aplicacao * 12`
+- `acumulado24 = capitalInicial + aplicacao * 24`
+- `acumulado60 = capitalInicial + aplicacao * 60`
 
-## Projeção sem juros
-`acumulado12 = capitalInicial + (aplicacao * 12)`
-
-`acumulado24 = capitalInicial + (aplicacao * 24)`
-
-`acumulado60 = capitalInicial + (aplicacao * 60)`
+Essas projeções não consideram rendimento.
 
 ## Simulação complementar com juros
+A taxa é convertida para um fator multiplicador:
+
 `taxaJuros = (juros / 100) + 1`
 
-`valorComJuros = acumuladoN * Math.pow(taxaJuros, N)`
+A simulação aplica o fator ao valor acumulado projetado para o período usando `Math.pow`, por exemplo:
 
-É uma simulação simplificada: não capitaliza cada aporte mensal individualmente.
+`simularJuros12 = acumulado12 * Math.pow(taxaJuros, 12)`
+
+A mesma lógica é usada para 24 e 60 períodos. Esta é uma aproximação didática: não representa o cálculo completo de aportes mensais com capitalização mês a mês.

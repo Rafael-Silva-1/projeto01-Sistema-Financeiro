@@ -1,31 +1,40 @@
 # Requisitos do projeto
 
 ## Objetivo
-Programa de terminal em Java para visualizar a situação financeira mensal e estimar acumulação de dinheiro.
+Desenvolver um programa de terminal em Java que ajude a visualizar a situação financeira mensal e estimar a acumulação de dinheiro em diferentes períodos.
 
-## Entradas principais
-Nome, salário bruto, desconto, despesas fixas e variáveis, capital inicial, aporte mensal e taxa de juros.
+## Dados solicitados
+- Nome do usuário.
+- Salário bruto mensal.
+- Desconto salarial.
+- Despesas fixas.
+- Despesas variáveis.
+- Capital inicial.
+- Aporte mensal.
+- Taxa de juros usada na simulação complementar.
 
-## Validações básicas
-- Salário bruto de pelo menos R$ 1,00.
-- Desconto e despesas não negativos.
-- Renda líquida maior que zero.
-- Capital inicial não negativo.
-- Aporte mensal mínimo de R$ 10,00.
-- Taxa de juros maior que zero.
-- Despesas superiores à renda são permitidas para demonstrar o déficit.
+## Regras de validação
+- O salário bruto deve ser de pelo menos R$ 1,00.
+- Desconto e despesas não podem ser negativos.
+- A renda líquida deve ser maior que zero.
+- O capital inicial não pode ser negativo.
+- O aporte mensal deve respeitar o mínimo definido pelo programa (R$ 10,00).
+- A taxa de juros da simulação complementar deve ser maior que zero.
+- Valores não numéricos nos campos numéricos devem provocar nova solicitação, em vez de prosseguir com a leitura inválida.
+- A resposta à pergunta de nova simulação deve ser validada para aceitar a opção de continuar ou encerrar.
 
-## Interpretação de resultados
-### v1.1.2 — Saldo mensal
-- `saldoMensal > 0`: saldo positivo.
-- `saldoMensal == 0`: saldo zerado.
-- `saldoMensal < 0`: déficit mensal.
+Despesas maiores que a renda líquida podem ser exibidas como déficit; o programa não deve ocultar essa situação.
 
-### v1.1.3 — Indicadores
-- Renda comprometida: menos de 50%, exatamente 50%, acima de 50% até 100%, ou acima de 100%.
-- Capacidade de poupança: percentual positivo, zero ou negativo.
+## Comportamentos esperados
+- Calcular renda líquida, despesas totais e saldo mensal.
+- Exibir indicadores financeiros e mensagens de interpretação.
+- Apresentar projeções sem juros para 12, 24 e 60 meses.
+- Apresentar a simulação complementar de juros compostos.
+- Permitir executar várias simulações durante a mesma execução do programa.
 
-As faixas são referências didáticas, não regras financeiras universais.
-
-## Fora do escopo
-Tratamento completo de entradas não numéricas, validação de `NaN`/infinito, interface gráfica, armazenamento persistente, recomendações automáticas e refatoração em métodos.
+## Fora do escopo desta versão
+- Interface gráfica.
+- Armazenamento de dados entre execuções.
+- Separação da lógica em métodos ou classes auxiliares.
+- Cálculo financeiro detalhado de cada aporte mensal com capitalização individual.
+- Validação especializada para todos os valores especiais de ponto flutuante, como `NaN` e infinito.

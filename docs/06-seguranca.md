@@ -1,20 +1,24 @@
-# Segurança e limitações técnicas
+# Limitações e cuidados
 
-## Estado atual
-Projeto educacional local executado no terminal, sem autenticação, banco de dados ou serviços externos.
+## Uso educativo
+O Simulador Financeiro é um projeto de estudo de Java e lógica de programação. Os resultados não substituem orientação financeira profissional.
 
-## Limitações conhecidas
-- `Scanner.nextDouble()` pode lançar `InputMismatchException` para entradas não numéricas ou em formato inesperado.
-- Não há validação explícita para `NaN` e infinito.
-- A lógica permanece concentrada no método `main`.
-- As validações atuais cobrem regras básicas, não todos os casos possíveis.
+## Validação de entradas
+A versão 1.2.0 trata entradas não numéricas nos campos numéricos com `Scanner.hasNextDouble()` e descarte da entrada inválida. Ainda assim, a validação depende do formato numérico reconhecido pelo ambiente de execução.
 
-## Melhorias futuras
-- Tratamento de entradas inválidas.
-- Validação de valores não finitos.
-- Separação de entrada/saída, cálculos e validações.
-- Testes automatizados.
-- Revisão de precisão monetária, considerando `BigDecimal` quando apropriado.
+## Dados pessoais
+O programa solicita o nome e dados financeiros durante a execução. Conforme a lógica documentada, não há armazenamento persistente dos dados entre execuções. Evite inserir informações reais sensíveis ao compartilhar capturas de tela ou demonstrações públicas.
 
-## Uso responsável
-Os resultados são estimativas educativas e não constituem aconselhamento financeiro.
+## Limitações técnicas
+- O programa é executado no terminal.
+- A lógica continua concentrada no método `main`.
+- A simulação de juros é simplificada e não calcula cada aporte individualmente ao longo do tempo.
+- As recomendações são baseadas em regras condicionais simples e não consideram todas as circunstâncias pessoais.
+- A validação de resposta de continuação deve aceitar apenas as opções previstas pelo programa.
+
+## Próximas melhorias possíveis
+- Dividir a lógica em métodos.
+- Adotar `BigDecimal` para cálculos monetários com maior controle de precisão.
+- Padronizar a leitura de números decimais com vírgula ou ponto.
+- Criar testes automatizados.
+- Melhorar o modelo de juros compostos para considerar cada aporte mensal.
