@@ -1,80 +1,81 @@
-# Simulador Financeiro Pessoal
+# Simulador Financeiro
 
-Projeto de terminal desenvolvido em Java para praticar lógica de programação e apresentar uma visão básica da situação financeira mensal.
+**Versão:** 1.3.0  
+**Linguagem:** Java  
+**Tipo:** Aplicação de console
+
+## Sobre o projeto
+
+O Simulador Financeiro é uma aplicação de console desenvolvida em Java para receber informações financeiras do usuário, calcular renda líquida, despesas, saldo mensal e indicadores financeiros, além de apresentar projeções de acúmulo de patrimônio.
+
+O projeto também é utilizado como prática de lógica de programação, validação de entradas, estruturas de repetição, métodos, parâmetros e retornos.
 
 ## Funcionalidades
 
-- Solicitação de dados pessoais e financeiros.
-- Validação de entradas numéricas, com repetição da pergunta quando o usuário informa um valor não numérico.
-- Validação de regras básicas para os valores financeiros.
-- Cálculo da renda líquida, despesas totais e saldo mensal.
-- Cálculo e interpretação da renda comprometida e da capacidade de poupança.
-- Mensagens de orientação básica conforme a situação financeira identificada.
-- Projeções de acumulação em 12, 24 e 60 meses sem juros.
-- Simulação complementar de crescimento com juros compostos.
-- Opção de realizar outra simulação sem encerrar e abrir o programa novamente.
-- Validação da resposta para continuar ou encerrar.
+- Cadastro do nome do usuário durante a execução.
+- Leitura e validação de salário bruto e desconto salarial.
+- Cálculo da renda líquida.
+- Leitura de despesas fixas e variáveis.
+- Cálculo das despesas totais e do saldo mensal.
+- Exibição da situação financeira conforme o saldo.
+- Cálculo dos indicadores de renda comprometida e capacidade de poupança.
+- Projeção de patrimônio sem juros para 12, 24 e 60 meses.
+- Simulação de juros compostos sem novas aplicações para 12, 24 e 60 meses.
+- Repetição da simulação sem reiniciar o programa.
 
-## Versão atual
+## Novidades da versão 1.3.0
 
-**v1.2.0 — Recomendações financeiras e repetição da simulação**
+Esta versão tem como foco a organização do código por meio de métodos:
 
-Esta versão reúne mudanças importantes no fluxo do programa: recomendações baseadas em estruturas condicionais, repetição da simulação com `do...while`, tratamento de entradas não numéricas usando `Scanner` e validação da resposta para executar uma nova simulação.
+- Criação de métodos com retorno (`double`).
+- Criação de métodos sem retorno (`void`).
+- Uso de parâmetros e argumentos.
+- Separação entre cálculos e exibição de mensagens.
+- Reutilização de métodos para calcular projeções em diferentes períodos.
+- Redução de cálculos repetidos no método `main`.
 
-## Tecnologias e conceitos
+## Requisitos
 
-- Java
-- `Scanner`
-- Variáveis e tipos primitivos
-- Operadores aritméticos
-- Estruturas condicionais (`if`, `else if`, `else`)
-- Estruturas de repetição (`while` e `do...while`)
-- Validação de entrada com `hasNextDouble()`
-- Formatação de saída com `printf`
-- `Math.pow` para a simulação de juros compostos
+- Java JDK instalado.
+- Editor ou terminal capaz de compilar e executar programas Java.
 
 ## Como executar
 
-Com o JDK instalado, na pasta que contém `Main.java`, compile e execute:
+No terminal, dentro da pasta que contém `Main.java`:
 
 ```bash
 javac Main.java
 java Main
 ```
 
-## Documentação
+## Organização dos arquivos
 
-A pasta `docs/` contém:
-- `01-requisitos.md` — objetivo, entradas e regras de validação;
-- `02-logica-do-projeto.md` — fluxo e comportamento geral;
-- `03-fluxograma.md` — representação textual do fluxo;
-- `04-formulas-financeiras.md` — fórmulas utilizadas;
-- `05-casos-de-teste.md` — cenários para testes manuais;
-- `06-seguranca.md` — limitações e cuidados.
+```text
+Simulador_Financeiro/
+├── Main.java
+├── README.md
+└── docs/
+    ├── 01-visao-geral.md
+    ├── 02-regras-de-negocio.md
+    ├── 03-formulas-financeiras.md
+    ├── 04-metodos-e-organizacao.md
+    ├── 05-plano-de-testes.md
+    └── 06-historico-de-versoes.md
+```
 
-## Limitações conhecidas
+## Observação sobre as projeções
 
-- A lógica do programa permanece concentrada no método `main`.
-- A simulação de juros compostos é simplificada: aplica a taxa ao valor acumulado projetado sem juros, em vez de calcular individualmente cada aporte mensal ao longo do período.
-- As mensagens e faixas de interpretação são educativas e não representam regras financeiras universais.
-- O programa não substitui orientação financeira profissional.
-- A validação de números depende do formato numérico reconhecido pela configuração usada pelo `Scanner`; entradas com vírgula ou ponto decimal podem se comportar de forma diferente conforme a configuração.
+A projeção sem juros considera o capital inicial somado aos aportes mensais multiplicados pela quantidade de meses.
 
-## Histórico de versões
+A simulação identificada no programa como **“SEM NOVAS APLICAÇÕES”** aplica o fator de juros ao montante acumulado sem juros do período. Ela não representa aportes mensais rendendo juros mês a mês.
 
-### v1.2.0 — Recomendações financeiras e repetição da simulação
-- Incluídas recomendações básicas por meio de estruturas condicionais.
-- Implementada repetição do fluxo de simulação com `do...while`.
-- Incluído tratamento de entradas não numéricas para os campos numéricos.
-- Incluída validação da resposta para continuar ou encerrar.
-- Testes concluídos sem erros, conforme verificação manual do projeto.
-- Documentação preparada para a versão.
+## Próximas melhorias possíveis
 
-### v1.1.3 — Interpretação dos indicadores financeiros
-- Adicionadas mensagens para interpretar renda comprometida e capacidade de poupança.
+- Evoluir a estrutura para Programação Orientada a Objetos.
+- Separar responsabilidades em classes.
+- Aprimorar a modelagem das projeções financeiras.
+- Ampliar os testes automatizados.
 
-### v1.1.2 — Interpretação da situação financeira
-- Adicionadas mensagens para saldo positivo, zerado e negativo.
+## Histórico
 
-### v1.1.1 — Validações de dados
-- Adicionadas validações básicas de valores financeiros.
+Consulte [`docs/06-historico-de-versoes.md`](docs/06-historico-de-versoes.md).
