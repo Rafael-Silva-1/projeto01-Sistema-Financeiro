@@ -1,81 +1,92 @@
 # Simulador Financeiro
 
-**Versão:** 1.3.0  
+**Versão:** 1.4.1  
 **Linguagem:** Java  
-**Tipo:** Aplicação de console
+**Tipo:** Aplicação de console  
+**Status:** Em desenvolvimento
 
 ## Sobre o projeto
 
-O Simulador Financeiro é uma aplicação de console desenvolvida em Java para receber informações financeiras do usuário, calcular renda líquida, despesas, saldo mensal e indicadores financeiros, além de apresentar projeções de acúmulo de patrimônio.
+O Simulador Financeiro é um projeto desenvolvido para praticar programação Java e conceitos de engenharia de software por meio de uma aplicação que recebe informações financeiras, calcula indicadores e apresenta projeções.
 
-O projeto também é utilizado como prática de lógica de programação, validação de entradas, estruturas de repetição, métodos, parâmetros e retornos.
+O projeto está sendo evoluído gradualmente. A partir da versão 1.4.0, o foco passou a ser a introdução da Programação Orientada a Objetos (POO), com separação de dados e responsabilidades em classes.
 
-## Funcionalidades
+## Funcionalidades já implementadas
 
-- Cadastro do nome do usuário durante a execução.
-- Leitura e validação de salário bruto e desconto salarial.
+- Leitura dos dados financeiros pelo terminal.
 - Cálculo da renda líquida.
-- Leitura de despesas fixas e variáveis.
-- Cálculo das despesas totais e do saldo mensal.
-- Exibição da situação financeira conforme o saldo.
-- Cálculo dos indicadores de renda comprometida e capacidade de poupança.
-- Projeção de patrimônio sem juros para 12, 24 e 60 meses.
-- Simulação de juros compostos sem novas aplicações para 12, 24 e 60 meses.
-- Repetição da simulação sem reiniciar o programa.
+- Registro e soma de despesas fixas e variáveis.
+- Cálculo do saldo mensal.
+- Indicadores de comprometimento da renda e capacidade de poupança.
+- Recomendações financeiras baseadas em condições.
+- Validação de entradas numéricas e de respostas de continuidade.
+- Simulação de acúmulo de patrimônio em diferentes períodos.
+- Projeções com juros compostos, conforme a lógica implementada no projeto.
+- Repetição de simulações na mesma execução.
 
-## Novidades da versão 1.3.0
+## Evolução para orientação a objetos
 
-Esta versão tem como foco a organização do código por meio de métodos:
+A versão 1.4.1 dá continuidade à reorganização do código iniciada na versão 1.4.0.
 
-- Criação de métodos com retorno (`double`).
-- Criação de métodos sem retorno (`void`).
-- Uso de parâmetros e argumentos.
-- Separação entre cálculos e exibição de mensagens.
-- Reutilização de métodos para calcular projeções em diferentes períodos.
-- Redução de cálculos repetidos no método `main`.
+Classes criadas:
 
-## Requisitos
+- `Usuario`: representa os dados do usuário, como nome, salário bruto e desconto.
+- `Financas`: reúne os dados calculados e informados relacionados à situação financeira.
 
-- Java JDK instalado.
-- Editor ou terminal capaz de compilar e executar programas Java.
+Nesta etapa, os atributos dessas classes passaram a utilizar o modificador `private`. Os métodos getters e setters estão sendo implementados e integrados gradualmente.
 
-## Como executar
+**Atenção:** esta versão está em desenvolvimento. A integração completa dos atributos privados com o `Main.java`, a revisão dos métodos de acesso e os testes de execução ainda precisam ser concluídos. Portanto, o código desta etapa pode não compilar até que essa integração seja finalizada.
 
-No terminal, dentro da pasta que contém `Main.java`:
-
-```bash
-javac Main.java
-java Main
-```
-
-## Organização dos arquivos
+## Estrutura atual prevista
 
 ```text
-Simulador_Financeiro/
-├── Main.java
-├── README.md
-└── docs/
-    ├── 01-visao-geral.md
-    ├── 02-regras-de-negocio.md
-    ├── 03-formulas-financeiras.md
-    ├── 04-metodos-e-organizacao.md
-    ├── 05-plano-de-testes.md
-    └── 06-historico-de-versoes.md
+Simulador-Financeiro/
+├── src/
+│   ├── Main.java
+│   └── entities/
+│       ├── Usuario.java
+│       └── Financas.java
+├── docs/
+│   ├── 01-visao-geral.md
+│   ├── 02-funcionalidades.md
+│   ├── 03-regras-de-negocio.md
+│   ├── 04-orientacao-a-objetos.md
+│   └── 05-historico-de-versoes.md
+└── README.md
 ```
 
-## Observação sobre as projeções
+A estrutura pode variar conforme a organização dos arquivos no ambiente de desenvolvimento.
 
-A projeção sem juros considera o capital inicial somado aos aportes mensais multiplicados pela quantidade de meses.
+## Tecnologias e conceitos
 
-A simulação identificada no programa como **“SEM NOVAS APLICAÇÕES”** aplica o fator de juros ao montante acumulado sem juros do período. Ela não representa aportes mensais rendendo juros mês a mês.
+- Java
+- `Scanner` para entrada de dados
+- Métodos, parâmetros e retornos
+- Estruturas condicionais e de repetição
+- Validação de dados
+- Classes, objetos e encapsulamento
+- Git e GitHub para versionamento
 
-## Próximas melhorias possíveis
+## Documentação
 
-- Evoluir a estrutura para Programação Orientada a Objetos.
-- Separar responsabilidades em classes.
-- Aprimorar a modelagem das projeções financeiras.
-- Ampliar os testes automatizados.
+Os documentos complementares estão na pasta [`docs`](docs/):
 
-## Histórico
+1. [Visão geral](docs/01-visao-geral.md)
+2. [Funcionalidades](docs/02-funcionalidades.md)
+3. [Regras de negócio](docs/03-regras-de-negocio.md)
+4. [Orientação a objetos](docs/04-orientacao-a-objetos.md)
+5. [Histórico de versões](docs/05-historico-de-versoes.md)
 
-Consulte [`docs/06-historico-de-versoes.md`](docs/06-historico-de-versoes.md).
+## Objetivo de aprendizagem
+
+O projeto também funciona como laboratório de estudos. A implementação é feita por etapas, com foco em compreender a lógica, identificar erros, organizar responsabilidades e evoluir o código sem pular os fundamentos.
+
+## Próximos passos
+
+- Finalizar getters e setters de `Usuario`.
+- Criar os métodos de acesso de `Financas`.
+- Atualizar o `Main.java` para utilizar os métodos de acesso.
+- Avaliar a responsabilidade de cada classe.
+- Preservar as funcionalidades existentes durante a refatoração.
+- Executar testes após a integração.
+- Atualizar a documentação quando a versão estiver concluída.

@@ -1,31 +1,32 @@
 import java.util.Scanner;
+import entities.Usuario;
+import entities.Financas;
 
 public class Main {
 
     public static void main(String[] args) {
 
         // DECLARAÇÃO DE VARIÁVEIS
-        Scanner sc;
         char continuar;
         boolean valorBruto, valorDesconto, valorDespFixa, valorDespVariavel, valorCapInicial, valorAplicacao, valorJuros;
-        String nome, resp;
-        double salarioBruto, desconto, despFixa, despVariavel;
-        double rendaLiquida, despTotal, saldoMensal;
-        double comprometida, poupar, aplicacao, capitalInicial;
+        String resp;
+        double aplicacao, capitalInicial;
         double acumulado12, acumulado24, acumulado60;
         double juros, taxaJuros, simularJuros12, simularJuros24, simularJuros60;
         // -------------------------------------------------------------------------------------
 
-        sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        Usuario usuario = new Usuario();
+        Financas financas = new Financas();
         do {
             // CABEÇALHO DO PROGRAMA
             System.out.print("Digite seu nome: ");
-            nome = sc.nextLine();
+            usuario.nome = sc.nextLine();
 
             System.out.println("");
             System.out.println("================================================");
             System.out.println("              SIMULADOR FINANCEIRO              ");
-            System.out.println("              Usuário: " + nome + "              ");
+            System.out.println("              Usuário: " + usuario.nome + "              ");
             System.out.println("================================================");
             System.out.println("");
 
@@ -33,16 +34,16 @@ public class Main {
             System.out.println("Renda");
 
             do {
-                salarioBruto = 0;
+                usuario.salarioBruto = 0;
                 valorBruto = false;
 
                 while (!valorBruto) {
                     System.out.print("Digite seu salário bruto mensal: ");
 
                     if (sc.hasNextDouble()) {
-                        salarioBruto = sc.nextDouble();
+                        usuario.salarioBruto = sc.nextDouble();
 
-                        if (salarioBruto < 1.0) {
+                        if (usuario.salarioBruto < 1.0) {
                             System.out.println("Erro: O salário bruto deve ser igual ou superior a R$ 1,00 para continuar.");
                         } else {
                             valorBruto = true;
@@ -53,16 +54,16 @@ public class Main {
                     }
                 }
 
-                desconto = 0;
+                usuario.desconto = 0;
                 valorDesconto = false;
 
                 while (!valorDesconto) {
                     System.out.print("Qual é o seu desconto salarial? ");
 
                     if (sc.hasNextDouble()) {
-                        desconto = sc.nextDouble();
+                        usuario.desconto = sc.nextDouble();
 
-                        if (desconto < 0) {
+                        if (usuario.desconto < 0) {
                             System.out.println("Erro: O desconto salarial não pode ser negativo.");
                         } else {
                             valorDesconto = true;
@@ -73,28 +74,28 @@ public class Main {
                     }
                 }
 
-                if (desconto > salarioBruto) {
+                if (usuario.desconto > usuario.salarioBruto) {
                     System.out.println("Alerta: Os descontos não podem ultrapassar o valor do salário bruto.");
                 }
 
-            } while (desconto >= salarioBruto);
+            } while (usuario.desconto >= usuario.salarioBruto);
 
-            rendaLiquida = calcularRendaLiquida(salarioBruto, desconto);
-            mensagemRendaLiquida(rendaLiquida);
+            financas.rendaLiquida = calcularRendaLiquida(usuario.salarioBruto, usuario.desconto);
+            mensagemRendaLiquida(financas.rendaLiquida);
             // CÁLCULO DE RENDA LÍQUIDA: fim
 
             // CÁLCULO DE DESPESAS: início
             System.out.println("Despesas");
 
             valorDespFixa = false;
-            despFixa = 0;
+            financas.despFixa = 0;
 
             while (!valorDespFixa) {
                 System.out.print("Quais são as suas despesas fixas do mês? ");
 
                 if (sc.hasNextDouble()) {
-                    despFixa = sc.nextDouble();
-                    if (despFixa < 0) {
+                    financas.despFixa = sc.nextDouble();
+                    if (financas.despFixa < 0) {
                         System.out.println("Erro: As despesas fixas não podem ser negativas.");
                     } else {
                         valorDespFixa = true;
@@ -106,13 +107,13 @@ public class Main {
             }
 
             valorDespVariavel = false;
-            despVariavel = 0;
+            financas.despVariavel = 0;
 
             while (!valorDespVariavel) {
                 System.out.print("Quais são as suas despesas variáveis no mês? ");
                 if (sc.hasNextDouble()) {
-                    despVariavel = sc.nextDouble();
-                    if (despVariavel < 0) {
+                    financas.despVariavel = sc.nextDouble();
+                    if (financas.despVariavel < 0) {
                         System.out.println("Erro: As despesas variáveis não podem ser negativas.");
                     } else {
                         valorDespVariavel = true;
@@ -123,38 +124,38 @@ public class Main {
                 }
             }
 
-            despTotal = calculoDespesas(despFixa, despVariavel);
+            financas.despTotal = calculoDespesas(financas.despFixa, financas.despVariavel);
 
             System.out.println("");
-            System.out.println("Despesas totais = " + despTotal);
+            System.out.println("Despesas totais = " + financas.despTotal);
             // CÁLCULO DE DESPESAS: fim
 
             // SALDO DO FINAL DO MÊS: início
             System.out.println("");
 
-            saldoMensal = saldoDoMes(rendaLiquida, despTotal);
+            financas.saldoMensal = saldoDoMes(financas.rendaLiquida, financas.despTotal);
 
-            System.out.printf("Saldo mensal = %.2f%n", saldoMensal);
+            System.out.printf("Saldo mensal = %.2f%n", financas.saldoMensal);
 
             System.out.println("");
 
-            situacaoFinanceira(saldoMensal);
+            situacaoFinanceira(financas.saldoMensal);
             // SALDO DO FINAL DO MÊS: fim
 
             // CÁLCULO DOS INDICADORES FINANCEIROS: início
             System.out.println("");
             System.out.println("Indicadores");
 
-            comprometida = indicadoresFinanceiros(despTotal, rendaLiquida);
-            poupar = indicadoresFinanceiros(saldoMensal, rendaLiquida);
+            financas.comprometida = indicadoresFinanceiros(financas.despTotal, financas.rendaLiquida);
+            financas.poupar = indicadoresFinanceiros(financas.saldoMensal, financas.rendaLiquida);
 
-            System.out.printf("Renda comprometida (%%) = %.1f%n", comprometida);
+            System.out.printf("Renda comprometida (%%) = %.1f%n", financas.comprometida);
 
-            if (comprometida < 50) {
+            if (financas.comprometida < 50) {
                 System.out.println("Menos da metade de sua renda líquida está comprometida com despesas.");
-            } else if (comprometida == 50) {
+            } else if (financas.comprometida == 50) {
                 System.out.println("Metade da sua renda está comprometida com despesas.");
-            } else if (comprometida <= 100) {
+            } else if (financas.comprometida <= 100) {
                 System.out.println("Mais da metade da renda está comprometida.");
                 System.out.println("");
                 System.out.println("Avalie os gastos para encontrar oportunidades de economia.");
@@ -162,9 +163,9 @@ public class Main {
                 System.out.println("As despesas superam a renda líquida.");
             }
 
-            System.out.printf("Capacidade de poupança (%%) = %.1f%n", poupar);
+            System.out.printf("Capacidade de poupança (%%) = %.1f%n", financas.poupar);
 
-            if (poupar == 0) {
+            if (financas.poupar == 0) {
                 System.out.println("");
                 System.out.println("Procure pequenas despesas que possam ser reduzidas.");
             }

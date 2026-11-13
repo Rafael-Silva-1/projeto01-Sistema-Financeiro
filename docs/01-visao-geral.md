@@ -1,29 +1,24 @@
-# 01 — Visão geral
+# 1. Visão geral
 
-## Objetivo
+## Propósito
 
-O Simulador Financeiro é um programa de console que permite ao usuário informar dados básicos de sua situação financeira e visualizar cálculos e projeções.
+O Simulador Financeiro é uma aplicação de console que ajuda a visualizar uma situação financeira básica a partir de informações fornecidas pelo usuário.
 
-## Fluxo geral
+O programa recebe dados de renda, descontos, despesas e valores destinados a economias. Com essas informações, calcula indicadores e apresenta projeções.
 
-1. O programa solicita o nome do usuário.
-2. Recebe salário bruto e desconto salarial.
-3. Calcula e exibe a renda líquida.
-4. Recebe despesas fixas e variáveis.
-5. Calcula despesas totais e saldo mensal.
-6. Apresenta a situação financeira e os indicadores.
-7. Recebe capital inicial e aplicação mensal.
-8. Calcula projeções sem juros para 12, 24 e 60 meses.
-9. Recebe uma taxa e apresenta projeções de juros sem novas aplicações.
-10. Pergunta se o usuário deseja realizar outra simulação.
+## Público e problema
 
-## Tecnologias e conceitos
+O projeto é voltado a pessoas que desejam compreender melhor a relação entre renda, despesas e capacidade de poupança. Seu objetivo é didático: apresentar cálculos de forma simples e permitir a experimentação de diferentes cenários.
 
-- Java.
-- `Scanner` para entrada de dados.
-- Condicionais (`if`, `else if`, `else`).
-- Estruturas de repetição (`while` e `do-while`).
-- Métodos estáticos.
-- Parâmetros, argumentos e valores de retorno.
-- `Math.pow()` para potência.
-- Formatação de saída com `printf()`.
+## Objetivos técnicos
+
+- Praticar lógica de programação com Java.
+- Organizar cálculos em métodos reutilizáveis.
+- Validar dados informados pelo usuário.
+- Separar responsabilidades usando classes e objetos.
+- Aplicar encapsulamento.
+- Manter documentação e histórico de versões.
+
+## Limites atuais
+
+A aplicação funciona por terminal e não utiliza banco de dados, API ou interface gráfica. A refatoração para orientação a objetos está em andamento na versão 1.4.1.
