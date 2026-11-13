@@ -1,24 +1,32 @@
-# 1. Visão geral
+# 01 — Visão geral
 
-## Propósito
+## Objetivo
 
-O Simulador Financeiro é uma aplicação de console que ajuda a visualizar uma situação financeira básica a partir de informações fornecidas pelo usuário.
+O Simulador Financeiro tem como objetivo receber informações básicas sobre a situação financeira de uma pessoa e apresentar cálculos que ajudem a compreender sua renda, despesas, saldo mensal e possibilidades de acumulação de patrimônio.
 
-O programa recebe dados de renda, descontos, despesas e valores destinados a economias. Com essas informações, calcula indicadores e apresenta projeções.
+O projeto também é utilizado para praticar Java e evoluir gradualmente os fundamentos de desenvolvimento backend.
 
-## Público e problema
+## Problema abordado
 
-O projeto é voltado a pessoas que desejam compreender melhor a relação entre renda, despesas e capacidade de poupança. Seu objetivo é didático: apresentar cálculos de forma simples e permitir a experimentação de diferentes cenários.
+A organização financeira exige compreender quanto da renda está comprometida com despesas e quanto pode permanecer disponível ao final do mês. O simulador reúne essas informações e apresenta indicadores calculados a partir dos dados informados.
 
-## Objetivos técnicos
+## Funcionamento geral
 
-- Praticar lógica de programação com Java.
-- Organizar cálculos em métodos reutilizáveis.
-- Validar dados informados pelo usuário.
-- Separar responsabilidades usando classes e objetos.
-- Aplicar encapsulamento.
-- Manter documentação e histórico de versões.
+1. O usuário informa seus dados e valores financeiros.
+2. O programa calcula a renda líquida.
+3. As despesas fixas e variáveis são somadas.
+4. O saldo mensal é calculado.
+5. O sistema apresenta indicadores e mensagens conforme os resultados.
+6. O usuário pode realizar simulações de acúmulo de patrimônio em períodos definidos.
+7. O programa permite iniciar outra simulação na mesma execução.
 
-## Limites atuais
+## Escopo da versão 1.4.1
 
-A aplicação funciona por terminal e não utiliza banco de dados, API ou interface gráfica. A refatoração para orientação a objetos está em andamento na versão 1.4.1.
+Esta versão concentra-se na reorganização interna do código com Programação Orientada a Objetos. As funcionalidades financeiras já existentes foram preservadas, enquanto dados e métodos foram separados em classes.
+
+## Limitações
+
+- Aplicação executada pelo console.
+- Não possui banco de dados ou persistência das informações.
+- Os resultados dependem dos valores informados durante a execução.
+- Não substitui orientação financeira profissional.

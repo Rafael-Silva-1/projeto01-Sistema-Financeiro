@@ -5,27 +5,39 @@ public class Usuario {
     private double salarioBruto;
     private double desconto;
 
-    public String getnome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setnome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public double getsalarioBruto() {
+    public double getSalarioBruto() {
         return salarioBruto;
     }
 
-    public void setsalarioBruto(double salarioBruto) {
+    public void setSalarioBruto(double salarioBruto) {
         this.salarioBruto = salarioBruto;
     }
 
-    public double getdesconto() {
+    public double getDesconto() {
         return desconto;
     }
 
-    public void setdesconto(double desconto) {
+    public void setDesconto(double desconto) {
         this.desconto = desconto;
     }
+
+
+    public double calcularRendaLiquida(double salarioBruto, double desconto) {
+        return salarioBruto - desconto;
+    }
+
+    public void mensagemRendaLiquida(double rendaLiquida) {
+        System.out.println("");
+        System.out.printf("Renda líquida = R$ %.2f%n", rendaLiquida);
+        System.out.println("");
+    }
+
 }

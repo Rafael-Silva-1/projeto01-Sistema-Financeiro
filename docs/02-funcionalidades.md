@@ -1,37 +1,47 @@
-# 2. Funcionalidades
+# 02 — Funcionalidades
 
-## Recursos implementados nas versões anteriores
+## Entrada de dados
 
-### Dados do usuário e renda
-- Solicita o nome do usuário.
-- Recebe salário bruto e desconto salarial.
-- Calcula a renda líquida.
+O programa solicita informações do usuário e valores necessários para os cálculos financeiros. As entradas numéricas e a resposta de continuidade possuem validações.
 
-### Despesas e saldo
-- Recebe despesas fixas e variáveis.
-- Calcula o total de despesas.
-- Calcula o saldo mensal.
-- Informa se o saldo é positivo, zero ou negativo.
+## Cálculos financeiros
+
+### Renda líquida
+
+Calculada pela subtração do desconto informado em relação ao salário bruto:
+
+`renda líquida = salário bruto - desconto`
+
+### Despesas totais
+
+As despesas fixas e variáveis são somadas:
+
+`despesas totais = despesas fixas + despesas variáveis`
+
+### Saldo mensal
+
+O saldo é obtido pela diferença entre a renda líquida e as despesas totais:
+
+`saldo mensal = renda líquida - despesas totais`
 
 ### Indicadores
-- Calcula o percentual da renda comprometida com despesas.
-- Calcula a capacidade de poupança em percentual.
-- Apresenta mensagens de orientação conforme os resultados.
 
-### Projeções
-- Calcula o acúmulo de capital em 12, 24 e 60 meses, considerando capital inicial e aportes mensais.
-- Apresenta uma simulação de juros compostos com os valores calculados pelo programa.
+O programa calcula o percentual de comprometimento da renda e a capacidade de poupança com base nos valores financeiros informados.
 
-### Validações e repetição
-- Verifica se as entradas numéricas são válidas.
-- Rejeita valores negativos em campos nos quais não são permitidos.
-- Permite realizar outra simulação sem reiniciar o programa.
-- Valida a resposta de continuidade como S ou N.
+## Recomendações
 
-## Evolução em andamento na v1.4.1
+Mensagens são apresentadas conforme o saldo mensal, indicando saldo positivo, saldo totalmente comprometido ou despesas superiores à renda líquida.
 
-- Classe `Usuario` criada para agrupar os dados do usuário.
-- Classe `Financas` criada para agrupar os dados financeiros.
-- Atributos das duas classes definidos como privados.
-- Getters e setters de `Usuario` iniciados.
-- Integração dos métodos de acesso com `Main.java` ainda pendente.
+## Simulação de patrimônio
+
+O sistema permite calcular o acúmulo em 12, 24 e 60 meses, considerando capital inicial e aplicação mensal. Também apresenta projeções com juros compostos usando a taxa convertida pelo método de cálculo de taxas.
+
+A fórmula de juros compostos mantida nesta versão é a que já existia no projeto:
+
+`montante projetado = acumulado * Math.pow(taxa, meses)`
+
+A projeção é identificada no programa conforme as condições apresentadas ao usuário. A documentação não altera nem substitui a fórmula implementada.
+
+## Repetição
+
+Após concluir uma simulação, o usuário pode escolher se deseja realizar outra execução do fluxo.

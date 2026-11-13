@@ -1,12 +1,12 @@
-# 4. Orientação a objetos
+# 04 — Orientação a objetos
 
-## Objetivo da refatoração
+## Objetivo da versão
 
-A partir da versão 1.4.0, o projeto passa a organizar parte dos dados em classes. A intenção é reduzir a concentração de informações no `Main.java` e preparar o programa para uma separação mais clara de responsabilidades.
+A versão 1.4.1 consolida a introdução da Programação Orientada a Objetos no Simulador Financeiro, distribuindo dados e métodos em classes com responsabilidades específicas.
 
-## Classes atuais
+## Classes
 
-### Usuario
+### `Usuario`
 
 Representa os dados básicos do usuário:
 
@@ -14,11 +14,11 @@ Representa os dados básicos do usuário:
 - `salarioBruto`
 - `desconto`
 
-Os atributos são privados. Os métodos getters e setters estão sendo construídos para permitir consulta e alteração controladas.
+Os atributos são privados e disponibilizados por getters e setters. A classe também contém métodos relacionados ao cálculo e à exibição da renda líquida.
 
-### Financas
+### `Financas`
 
-Agrupa os dados relacionados à situação financeira:
+Reúne os dados financeiros:
 
 - `rendaLiquida`
 - `despFixa`
@@ -28,32 +28,30 @@ Agrupa os dados relacionados à situação financeira:
 - `comprometida`
 - `poupar`
 
-Os atributos são privados. A criação dos métodos de acesso e a integração com o programa principal ainda estão pendentes.
+Os atributos são privados e acessados por getters e setters. A classe contém métodos para somar despesas, calcular o saldo, calcular indicadores e apresentar a situação financeira.
 
-## Encapsulamento
+### `Simulacao`
 
-O modificador `private` impede o acesso direto aos atributos a partir de outras classes. Getters e setters são métodos públicos que permitem consultar e modificar os valores de maneira controlada.
+Responsável pelos cálculos e mensagens relacionados às projeções de patrimônio:
 
-Exemplo conceitual:
+- Conversão da taxa de juros.
+- Cálculo do acumulado sem rendimento.
+- Cálculo da projeção com juros compostos.
+- Exibição dos resultados para os períodos simulados.
 
-```java
-public double getSalarioBruto() {
-    return salarioBruto;
-}
+### `Main`
 
-public void setSalarioBruto(double salarioBruto) {
-    this.salarioBruto = salarioBruto;
-}
-```
+Coordena o fluxo da aplicação: solicita entradas, utiliza os objetos, chama os métodos correspondentes e apresenta os resultados.
 
-## Próximas etapas
+## Conceitos aplicados
 
-1. Finalizar os métodos getters e setters de `Usuario`.
-2. Criar os métodos de acesso de `Financas`.
-3. Alterar o `Main.java` para utilizar getters e setters, sem acessar atributos privados diretamente.
-4. Avaliar quais cálculos devem permanecer no programa principal e quais devem passar para as classes.
-5. Testar se as funcionalidades anteriores continuam funcionando.
+- **Classe:** estrutura que agrupa atributos e comportamentos.
+- **Objeto:** instância de uma classe utilizada durante a execução.
+- **Encapsulamento:** proteção dos atributos com `private`.
+- **Getters e setters:** métodos de acesso e alteração dos atributos.
+- **Métodos de instância:** comportamentos chamados a partir dos objetos.
+- **Separação de responsabilidades:** cada classe concentra operações relacionadas ao seu propósito.
 
-## Fora do escopo desta etapa
+## Escopo não incluído
 
-Herança, polimorfismo, interfaces, banco de dados, APIs e interface gráfica não fazem parte do objetivo imediato desta versão.
+Esta versão não introduz construtores personalizados, herança, polimorfismo, interfaces, banco de dados ou interface gráfica. Esses assuntos podem ser considerados em versões futuras, sem fazer parte do escopo encerrado da 1.4.1.

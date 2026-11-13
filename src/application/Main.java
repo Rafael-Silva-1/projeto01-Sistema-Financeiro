@@ -1,6 +1,8 @@
+
 import java.util.Scanner;
 import entities.Usuario;
 import entities.Financas;
+import entities.Simulacao;
 
 public class Main {
 
@@ -8,7 +10,8 @@ public class Main {
 
         // DECLARAÇÃO DE VARIÁVEIS
         char continuar;
-        boolean valorBruto, valorDesconto, valorDespFixa, valorDespVariavel, valorCapInicial, valorAplicacao, valorJuros;
+        boolean valorBruto, valorDesconto, valorDespFixa, valorDespVariavel;
+        boolean valorCapInicial, valorAplicacao, valorJuros;
         String resp;
         double aplicacao, capitalInicial;
         double acumulado12, acumulado24, acumulado60;
@@ -16,17 +19,20 @@ public class Main {
         // -------------------------------------------------------------------------------------
 
         Scanner sc = new Scanner(System.in);
+
         Usuario usuario = new Usuario();
         Financas financas = new Financas();
+        Simulacao simulacao = new Simulacao();
+
         do {
             // CABEÇALHO DO PROGRAMA
             System.out.print("Digite seu nome: ");
-            usuario.nome = sc.nextLine();
+            usuario.setNome(sc.nextLine());
 
             System.out.println("");
             System.out.println("================================================");
             System.out.println("              SIMULADOR FINANCEIRO              ");
-            System.out.println("              Usuário: " + usuario.nome + "              ");
+            System.out.println("              Usuário: " + usuario.getNome() + "              ");
             System.out.println("================================================");
             System.out.println("");
 
@@ -34,16 +40,16 @@ public class Main {
             System.out.println("Renda");
 
             do {
-                usuario.salarioBruto = 0;
+                usuario.setSalarioBruto(0);
                 valorBruto = false;
 
                 while (!valorBruto) {
                     System.out.print("Digite seu salário bruto mensal: ");
 
                     if (sc.hasNextDouble()) {
-                        usuario.salarioBruto = sc.nextDouble();
+                        usuario.setSalarioBruto(sc.nextDouble());
 
-                        if (usuario.salarioBruto < 1.0) {
+                        if (usuario.getSalarioBruto() < 1.0) {
                             System.out.println("Erro: O salário bruto deve ser igual ou superior a R$ 1,00 para continuar.");
                         } else {
                             valorBruto = true;
@@ -54,16 +60,16 @@ public class Main {
                     }
                 }
 
-                usuario.desconto = 0;
+                usuario.setDesconto(0);
                 valorDesconto = false;
 
                 while (!valorDesconto) {
                     System.out.print("Qual é o seu desconto salarial? ");
 
                     if (sc.hasNextDouble()) {
-                        usuario.desconto = sc.nextDouble();
+                        usuario.setDesconto(sc.nextDouble());
 
-                        if (usuario.desconto < 0) {
+                        if (usuario.getDesconto() < 0) {
                             System.out.println("Erro: O desconto salarial não pode ser negativo.");
                         } else {
                             valorDesconto = true;
@@ -74,28 +80,33 @@ public class Main {
                     }
                 }
 
-                if (usuario.desconto > usuario.salarioBruto) {
+                if (usuario.getDesconto() > usuario.getSalarioBruto()) {
                     System.out.println("Alerta: Os descontos não podem ultrapassar o valor do salário bruto.");
                 }
 
-            } while (usuario.desconto >= usuario.salarioBruto);
+            } while (usuario.getDesconto() >= usuario.getSalarioBruto());
 
-            financas.rendaLiquida = calcularRendaLiquida(usuario.salarioBruto, usuario.desconto);
-            mensagemRendaLiquida(financas.rendaLiquida);
+            financas.setRendaLiquida(usuario.calcularRendaLiquida(
+                usuario.getSalarioBruto(),
+                usuario.getDesconto()
+            ));
+
+            usuario.mensagemRendaLiquida(financas.getRendaLiquida());
             // CÁLCULO DE RENDA LÍQUIDA: fim
 
             // CÁLCULO DE DESPESAS: início
             System.out.println("Despesas");
 
             valorDespFixa = false;
-            financas.despFixa = 0;
+            financas.setDespFixa(0);
 
             while (!valorDespFixa) {
                 System.out.print("Quais são as suas despesas fixas do mês? ");
 
                 if (sc.hasNextDouble()) {
-                    financas.despFixa = sc.nextDouble();
-                    if (financas.despFixa < 0) {
+                    financas.setDespFixa(sc.nextDouble());
+
+                    if (financas.getDespFixa() < 0) {
                         System.out.println("Erro: As despesas fixas não podem ser negativas.");
                     } else {
                         valorDespFixa = true;
@@ -107,13 +118,15 @@ public class Main {
             }
 
             valorDespVariavel = false;
-            financas.despVariavel = 0;
+            financas.setDespVariavel(0);
 
             while (!valorDespVariavel) {
                 System.out.print("Quais são as suas despesas variáveis no mês? ");
+
                 if (sc.hasNextDouble()) {
-                    financas.despVariavel = sc.nextDouble();
-                    if (financas.despVariavel < 0) {
+                    financas.setDespVariavel(sc.nextDouble());
+
+                    if (financas.getDespVariavel() < 0) {
                         System.out.println("Erro: As despesas variáveis não podem ser negativas.");
                     } else {
                         valorDespVariavel = true;
@@ -124,38 +137,51 @@ public class Main {
                 }
             }
 
-            financas.despTotal = calculoDespesas(financas.despFixa, financas.despVariavel);
+            financas.setDespTotal(financas.calculoDespesas(
+                financas.getDespFixa(),
+                financas.getDespVariavel()
+            ));
 
             System.out.println("");
-            System.out.println("Despesas totais = " + financas.despTotal);
+            System.out.println("Despesas totais = " + financas.getDespTotal());
             // CÁLCULO DE DESPESAS: fim
 
             // SALDO DO FINAL DO MÊS: início
             System.out.println("");
 
-            financas.saldoMensal = saldoDoMes(financas.rendaLiquida, financas.despTotal);
+            financas.setSaldoMensal(financas.saldoDoMes(
+                financas.getRendaLiquida(),
+                financas.getDespTotal()
+            ));
 
-            System.out.printf("Saldo mensal = %.2f%n", financas.saldoMensal);
+            System.out.printf("Saldo mensal = %.2f%n", financas.getSaldoMensal());
 
             System.out.println("");
 
-            situacaoFinanceira(financas.saldoMensal);
+            financas.situacaoFinanceira(financas.getSaldoMensal());
             // SALDO DO FINAL DO MÊS: fim
 
             // CÁLCULO DOS INDICADORES FINANCEIROS: início
             System.out.println("");
             System.out.println("Indicadores");
 
-            financas.comprometida = indicadoresFinanceiros(financas.despTotal, financas.rendaLiquida);
-            financas.poupar = indicadoresFinanceiros(financas.saldoMensal, financas.rendaLiquida);
+            financas.setComprometida(financas.indicadoresFinanceiros(
+                financas.getDespTotal(),
+                financas.getRendaLiquida()
+            ));
 
-            System.out.printf("Renda comprometida (%%) = %.1f%n", financas.comprometida);
+            financas.setPoupar(financas.indicadoresFinanceiros(
+                financas.getSaldoMensal(),
+                financas.getRendaLiquida()
+            ));
 
-            if (financas.comprometida < 50) {
+            System.out.printf("Renda comprometida (%%) = %.1f%n", financas.getComprometida());
+
+            if (financas.getComprometida() < 50) {
                 System.out.println("Menos da metade de sua renda líquida está comprometida com despesas.");
-            } else if (financas.comprometida == 50) {
+            } else if (financas.getComprometida() == 50) {
                 System.out.println("Metade da sua renda está comprometida com despesas.");
-            } else if (financas.comprometida <= 100) {
+            } else if (financas.getComprometida() <= 100) {
                 System.out.println("Mais da metade da renda está comprometida.");
                 System.out.println("");
                 System.out.println("Avalie os gastos para encontrar oportunidades de economia.");
@@ -163,9 +189,9 @@ public class Main {
                 System.out.println("As despesas superam a renda líquida.");
             }
 
-            System.out.printf("Capacidade de poupança (%%) = %.1f%n", financas.poupar);
+            System.out.printf("Capacidade de poupança (%%) = %.1f%n", financas.getPoupar());
 
-            if (financas.poupar == 0) {
+            if (financas.getPoupar() == 0) {
                 System.out.println("");
                 System.out.println("Procure pequenas despesas que possam ser reduzidas.");
             }
@@ -180,8 +206,10 @@ public class Main {
 
             while (!valorCapInicial) {
                 System.out.print("Possui algum valor guardado? Quanto? ");
+
                 if (sc.hasNextDouble()) {
                     capitalInicial = sc.nextDouble();
+
                     if (capitalInicial < 0) {
                         System.out.println("Alerta: O valor guardado não pode ser menor que 0.");
                     } else {
@@ -198,8 +226,10 @@ public class Main {
 
             while (!valorAplicacao) {
                 System.out.print("Quanto deseja aplicar mensalmente? (mínimo de R$ 10,00) ");
+
                 if (sc.hasNextDouble()) {
                     aplicacao = sc.nextDouble();
+
                     if (aplicacao < 10) {
                         System.out.println("Alerta: O valor dos aportes mensais precisa ser de pelo menos R$ 10,00.");
                     } else {
@@ -211,10 +241,11 @@ public class Main {
                 }
             }
 
-            acumulado12 = calcularAcumulado(capitalInicial, aplicacao, 12);
-            acumulado24 = calcularAcumulado(capitalInicial, aplicacao, 24);
-            acumulado60 = calcularAcumulado(capitalInicial, aplicacao, 60);
-            mensagemAcumuloPatrimonio(acumulado12, acumulado24, acumulado60);
+            acumulado12 = simulacao.calcularAcumulado(capitalInicial, aplicacao, 12);
+            acumulado24 = simulacao.calcularAcumulado(capitalInicial, aplicacao, 24);
+            acumulado60 = simulacao.calcularAcumulado(capitalInicial, aplicacao, 60);
+
+            simulacao.mensagemAcumuloPatrimonio(acumulado12, acumulado24, acumulado60);
             // CÁLCULO DE ACÚMULO DE PATRIMÔNIO: fim
 
             // CÁLCULO DE PATRIMÔNIO COM JUROS: início
@@ -226,8 +257,10 @@ public class Main {
 
             while (!valorJuros) {
                 System.out.print("Digite a taxa de juros a ser calculada (ex.: 0,1): ");
+
                 if (sc.hasNextDouble()) {
                     juros = sc.nextDouble();
+
                     if (juros <= 0) {
                         System.out.println("Alerta: A taxa de juros deve ser superior a 0.");
                     } else {
@@ -239,12 +272,13 @@ public class Main {
                 }
             }
 
-            taxaJuros = calcularTaxas(juros);
+            taxaJuros = simulacao.calcularTaxas(juros);
 
-            simularJuros12 = calcularJurosCompostos(acumulado12, taxaJuros, 12);
-            simularJuros24 = calcularJurosCompostos(acumulado24, taxaJuros, 24);
-            simularJuros60 = calcularJurosCompostos(acumulado60, taxaJuros, 60);
-            mensagemAcumuloPatrimonio(simularJuros12, simularJuros24, simularJuros60);
+            simularJuros12 = simulacao.calcularJurosCompostos(acumulado12, taxaJuros, 12);
+            simularJuros24 = simulacao.calcularJurosCompostos(acumulado24, taxaJuros, 24);
+            simularJuros60 = simulacao.calcularJurosCompostos(acumulado60, taxaJuros, 60);
+
+            simulacao.mensagemAcumuloPatrimonio(simularJuros12, simularJuros24, simularJuros60);
             // CÁLCULO DE PATRIMÔNIO COM JUROS: fim
 
             System.out.println("");
@@ -270,64 +304,4 @@ public class Main {
 
         sc.close();
     }
-
-    // ÁREA DE MÉTODOS
-
-    public static double calcularRendaLiquida(double salarioBruto, double desconto) {
-        return salarioBruto - desconto;
-    }
-
-    public static void mensagemRendaLiquida(double rendaLiquida) {
-        System.out.println("");
-        System.out.printf("Renda líquida = R$ %.2f%n", rendaLiquida);
-        System.out.println("");
-    }
-
-    public static double calculoDespesas(double n1, double n2) {
-        return n1 + n2;
-    }
-
-    public static void situacaoFinanceira(double saldoMensal) {
-        if (saldoMensal > 0) {
-            System.out.println("=== Mês concluído com saldo positivo ===");
-            if (saldoMensal >= 50) {
-                System.out.println("Considere começar a guardar parte do dinheiro que sobrou.");
-            } else {
-                System.out.println("Sua sobra mensal é pequena. Avalie se é possível aumentar sua reserva financeira.");
-            }
-        } else if (saldoMensal == 0) {
-            System.out.println("=== Todo o seu saldo do mês foi comprometido ===");
-            System.out.println("");
-            System.out.println("Corte custos desnecessários ou busque uma fonte de renda extra para conseguir guardar mais dinheiro no final do mês.");
-        } else {
-            System.out.println("=== As despesas ultrapassaram a renda líquida ===");
-        }
-    }
-
-    public static double saldoDoMes(double n1, double n2) {
-        return n1 - n2;
-    }
-
-    public static double indicadoresFinanceiros(double n1, double n2) {
-        return (n1 / n2) * 100;
-    }
-
-    public static double calcularTaxas(double n1) {
-        return (n1 / 100) + 1;
-    }
-
-    public static double calcularAcumulado(double capitalInicial, double aplicacao, int meses) {
-        return capitalInicial + (aplicacao * meses);
-    }
-
-    public static double calcularJurosCompostos(double acumulado, double taxaJuros, int meses) {
-        return acumulado * (Math.pow(taxaJuros, meses));
-    }
-
-    public static void mensagemAcumuloPatrimonio(double meses12, double meses24, double meses60) {
-        System.out.printf("Valor acumulado após 12 meses = %.2f%n", meses12);
-        System.out.printf("Valor acumulado após 24 meses = %.2f%n", meses24);
-        System.out.printf("Valor acumulado após 60 meses = %.2f%n", meses60);
-    }
-
 }
